@@ -26,10 +26,15 @@ class AutomobilesList extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="shadow p-4 mt-4">
+							<h3>Automobiles</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
                                         <th>Name</th>
+                                        <th>Color</th>
+                                        <th>Year</th>
+                                        <th>Model</th>
+                                        <th>Manufacturer</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,6 +42,10 @@ class AutomobilesList extends React.Component {
                                         return (
                                             <tr key={auto.vin}>
 												<td>{auto.vin}</td>
+												<td>{auto.color}</td>
+												<td>{auto.year}</td>
+												<td>{auto.model.name}</td>
+												<td>{auto.model.manufacturer.name}</td>
                                             </tr>
                                         );
                                     })}

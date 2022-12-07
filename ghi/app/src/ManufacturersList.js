@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-class ManufacturerList extends React.Component {
+class ManufacturersList extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
@@ -25,6 +25,7 @@ class ManufacturerList extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="shadow p-4 mt-4">
+                            <h3>Manufacturers</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
@@ -52,54 +53,4 @@ class ManufacturerList extends React.Component {
         );
     };
 }
-export default ManufacturerList;
-
-
-
-// 	async handleDelete(id) {
-//         console.log('THIS ',id,' HERE');
-//         const manufacturerUrl = `http://localhost:8100/api/manufacturers/${id}/`;
-//         const fetchConfig = {
-//             method: "delete",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//         };
-
-// 		const response = await fetch(manufacturerUrl, fetchConfig);
-
-//         if (response.ok) {
-//             this.componentDidMount();
-//         }
-//     }
-// }
-//   return (
-//       <div>
-//       <h3>Manufacturer List</h3>
-//       <table className="table table-striped">
-//           <thead>
-//               <tr>
-//                   <th>Name</th>
-//                   <th>Manufacturer</th>
-//                   <th>Delete</th>
-//               </tr>
-//           </thead>
-//           <tbody>
-//               {props.manufacturers.map(manufacturer => {
-//                   return (
-//                       <tr key={manufacturer.name}>
-//                           <td>{ manufacturer.name }</td>
-//                           <td>
-//                               <button
-//                               onClick={() => deleteManufacturer(manufacturer.id)}
-//                               >Delete Manufacturer</button>
-//                           </td>
-//                       </tr>
-//                   );
-//               })}
-//           </tbody>
-//       </table>
-//       </div>
-//   );
-// }
-// export default ManufacturerList
+export default ManufacturersList;
