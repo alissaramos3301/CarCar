@@ -26,7 +26,14 @@ function App(props) {
 			<Route path="manufacturers" element={<ManufacturersList />} />
 			<Route path="models" element={<VehicleModelsList />} />
 			<Route path="automobiles" element={<AutomobilesList />} />
-			<Route path="automobiles/new" element={<AutomobilesList />} />
+			<Route path="automobiles/new" element={<AutomobileForm />} />
+			<Route path="sales" element={<SalesList />} />
+			<Route path="sales/new" element={<SalesForm />} />
+			<Route path="seller" element={<SalesPersonList />} />
+			<Route path="seller/new" element={<SalesPersonForm />} />
+			<Route path="customers" element={<CustomerForm />} />
+			<Route path='models/new' element={<VehicleModelsForm />} />
+			<Route path='manufacturers/new' element={<ManufacturerForm />} />
 		</Routes>
 		</div>
 	</BrowserRouter>
