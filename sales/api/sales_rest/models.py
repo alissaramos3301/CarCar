@@ -43,7 +43,7 @@ class Sale(models.Model):
 	)
 	customer = models.ForeignKey(
 		Customer,
-		relate_name="customer",
+		related_name="customer",
 		on_delete=models.PROTECT
 	)
 

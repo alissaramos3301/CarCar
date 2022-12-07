@@ -53,7 +53,7 @@ class SalesList extends React.Component {
                             </table>
                             <div>
                                 <Link to="/automobiles/new"
-                                className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">New Automobile</Link>
+                                className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">Add New Sale</Link>
                             </div>
                         </div>
                     </div>

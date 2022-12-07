@@ -69,7 +69,7 @@ class SalesForm extends React.Component {
         <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
                 <h1>Record a new Sale</h1>
-                <form onSubmit={this.handleSubmit} id="create-autombile-form">
+                <form onSubmit={this.handleSubmit} id="create-sale-form">
                     <div className="form-floating mb-3">
                         <select onChange={this.handleTestChange} placeholder="Automobile" required type="text" value={this.state.model_id} name="automobile" id="automobile" className="form-select">
                             <option value="automobile">Choose an automobile</option>
@@ -101,7 +101,7 @@ class SalesForm extends React.Component {
                         <input onChange={this.handleTestChange} placeholder="Price" required type="number" name="price" id="price" className="form-control" />
                         <label htmlFor="price">Price</label>
                     </div>
-                    <button className="btn btn-primary">Create</button>
+                    <button className="btn btn-primary">It's sold!</button>
                 </form>
             </div>
         </div >

@@ -69,7 +69,7 @@ class SalesPersonForm extends React.Component {
 				<div className="offset-3 col-6">
 					<div className="shadow p-4 mt-4">
 						<h1>Welcome to Sales</h1>
-						<form onSubmit={this.handleTestChange} id="create-autombile-form">
+						<form onSubmit={this.handleTestChange} id="create-employee-form">
 							<div className="form-floating mb-3">
 								<input onChange={this.handleTestChange} value={this.state.color} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
 								<label htmlFor="color">Full Name</label>

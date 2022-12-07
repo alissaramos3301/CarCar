@@ -9,29 +9,31 @@ import SalesList from './SalesList';
 import SalesPersonList from './SalesPersonHistory';
 import SalesForm from './SaleForm';
 import SalesPersonForm from './SalesPersonForm';
+import CustomerForm from './CustomerForm';
 
 function App(props) {
   // if (props.manufacturers === undefined && props.automobiles === undefined && props.models === undefined) {
   //   return null;
   // }
-  return (
-    <BrowserRouter>
-      <Nav />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="manufacturers" element={<ManufacturersList />} />
-          <Route path="models" element={<VehicleModelsList />} />
-          <Route path="automobiles" element={<AutomobilesList />} />
-          <Route path="automobiles/new" element={<AutomobileForm />} />
-          <Route path="sales" element={<SalesList />} />
-          <Route path="sales/new" element={<SalesForm />} />
-          <Route path="seller" element={<SalesPersonList />} />
-          <Route path="seller/new" element={<SalesPersonForm />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-  );
+	return (
+	<BrowserRouter>
+		<Nav />
+		<div className="container">
+		<Routes>
+			<Route path="/" element={<MainPage />} />
+			<Route path="manufacturers" element={<ManufacturersList />} />
+			<Route path="models" element={<VehicleModelsList />} />
+			<Route path="automobiles" element={<AutomobilesList />} />
+			<Route path="automobiles/new" element={<AutomobileForm />} />
+			<Route path="sales" element={<SalesList />} />
+			<Route path="sales/new" element={<SalesForm />} />
+			<Route path="seller" element={<SalesPersonList />} />
+			<Route path="seller/new" element={<SalesPersonForm />} />
+			<Route path="customers" element={<CustomerForm />} />
+		</Routes>
+		</div>
+	</BrowserRouter>
+	);
 }
 
 export default App;
