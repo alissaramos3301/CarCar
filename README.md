@@ -20,3 +20,11 @@ microservice, here.
 
 Explain your models and integration with the inventory
 microservice, here.
+
+Created AutomobileVO, SalesPerson, Customer, and Sale models.
+Sales has foreign keys:
+    -automobile pointing to AutomobileVO,
+    -sales_person pointing to SalesPerson
+    -customer pointing to Customer
+
+Automobile data is gathered through polling the api database in inventory
