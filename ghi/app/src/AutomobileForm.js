@@ -50,7 +50,6 @@ class AutomobileForm extends React.Component {
   }
 
 
-
   async handleSubmit(event) {
     event.preventDefault();
     const data = { ...this.state };
