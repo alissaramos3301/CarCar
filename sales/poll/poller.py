@@ -11,6 +11,21 @@ django.setup()
 
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
+# from sales_rest.models import VO
+
+# def get_location():
+#     url = "http://wardrobe-api:8000/api/locations/"
+#     response = requests.get(url)
+#     content = json.loads(response.content)
+#     print(content)
+
+#     for location in content["locations"]:
+#         LocationVO.objects.update_or_create(
+#             import_href=location["href"],
+#             closet_name=location["closet_name"],
+#             shelf_number=location["shelf_number"],
+#             section_number=location["section_number"],
+#         )
 
 def poll():
     while True:
