@@ -22,6 +22,12 @@ function Nav() {
 				<li className="nav-item">
 				<NavLink className="nav-link" to="/automobiles">Automobiles</NavLink>
 				</li>
+				<li className="nav-item">
+				<NavLink className="nav-link" to="/automobiles/new">Add Automobiles</NavLink>
+				</li>
+				<li className="nav-item">
+				<NavLink className="nav-link" to="/manufacturers/new">Add Manufacturers</NavLink>
+				</li>
 			</ul>
 			</div>
 		</div>
