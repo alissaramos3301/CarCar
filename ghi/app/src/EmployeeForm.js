@@ -53,7 +53,7 @@ class EmployeeForm extends React.Component {
 				name: "",
 				employee_number: "",
 			});
-			this.props.useNavigate("/employees/");
+			this.props.useNavigate("/sales/new");
 		}
 		// const newEmployee = await response.json();
 		// this.setState({ employee: newEmployee.employees})

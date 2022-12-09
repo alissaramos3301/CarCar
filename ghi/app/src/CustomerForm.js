@@ -58,7 +58,7 @@ class CustomerForm extends React.Component {
 				phone: '',
 				// customer: '',
 			});
-			this.props.useNavigate("/customers/");
+			this.props.useNavigate("/sales/new");
 		}
 		// const newCustomer = await response.json();
 		// this.setState({ customers: newCustomer.customers })
