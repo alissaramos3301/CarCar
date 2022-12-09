@@ -29,7 +29,7 @@ class SalesList extends React.Component {
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
-                                        <th>Sales Person</th>
+                                        <th>Employee</th>
                                         {/* <th>Customer</th>
                                         <th>VIN</th>
                                         <th>Sale Price</th> */}

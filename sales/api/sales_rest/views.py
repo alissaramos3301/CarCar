@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
-from .models import Sale, Customer, SalesPerson
+from .models import Sale, Customer, Employee
 
 
 class SaleEncoder(ModelEncoder):
@@ -26,8 +26,8 @@ class CustomerListEncoder(ModelEncoder):
 		'id',
 	]
 
-class SalesPersonEncoder(ModelEncoder):
-	model = SalesPerson
+class EmployeeEncoder(ModelEncoder):
+	model = Employee
 	properties = [
 		'name',
 		'employee_number',
@@ -178,20 +178,20 @@ def api_show_customer(request,pk):
 @require_http_methods(["GET", "POST"])
 def api_list_sellers(request):
 	if request.method == "GET":
-		sellers = SalesPerson.objects.all()
+		sellers = Employee.objects.all()
 		return JsonResponse(
 			{"sellers": sellers},
-			encoder=SalesPersonEncoder,
+			encoder=EmployeeEncoder,
 		)
 	else:
 		# try:
 		content = json.loads(request.body)
 		# print("content: " + content)
-		seller = SalesPerson.objects.create(**content)
+		seller = Employee.objects.create(**content)
 		# print("seller: " + seller)
 		return JsonResponse(
 			seller,
-			encoder=SalesPersonEncoder,
+			encoder=EmployeeEncoder,
 			safe=False,
 		)
 		# except:
@@ -205,31 +205,31 @@ def api_list_sellers(request):
 def api_show_seller(request,pk):
 	if request.method == "GET":
 		try:
-			seller = SalesPerson.objects.get(id=pk)
+			seller = Employee.objects.get(id=pk)
 			return JsonResponse(
 				seller,
-				encoder=SalesPersonEncoder,
+				encoder=EmployeeEncoder,
 				safe=False
 			)
-		except SalesPerson.DoesNotExist:
+		except Employee.DoesNotExist:
 			response = JsonResponse({"message": "The seller does not exist"})
 			response.status_code = 404
 			return response
 	elif request.method == "DELETE":
 		try:
-			seller = SalesPerson.objects.get(id=pk)
+			seller = Employee.objects.get(id=pk)
 			seller.delete()
 			return JsonResponse(
 				seller,
-				encoder=SalesPersonEncoder,
+				encoder=EmployeeEncoder,
 				safe=False
 			)
-		except SalesPerson.DoesNotExist:
+		except Employee.DoesNotExist:
 			return JsonResponse({"message": "Seller not exist"})
 	else:
 		try:
 			content = json.loads(request.body)
-			seller = SalesPerson.objects.get(id=pk)
+			seller = Employee.objects.get(id=pk)
 
 			props = ["name"]
 			for prop in props:
@@ -238,10 +238,10 @@ def api_show_seller(request,pk):
 			seller.save()
 			return JsonResponse(
 				seller,
-				encoder=SalesPersonEncoder,
+				encoder=EmployeeEncoder,
 				safe=False,
 			)
-		except SalesPerson.DoesNotExist:
+		except Employee.DoesNotExist:
 			response = JsonResponse({"message": "Does not exist"})
 			response.status_code = 404
 			return response

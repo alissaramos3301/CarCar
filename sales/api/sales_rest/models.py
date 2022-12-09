@@ -18,7 +18,7 @@ class AutomobileVO(models.Model):
 # 	name =
 # 	address =
 # 	phone =
-class SalesPerson(models.Model):
+class Employee(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	employee_number = models.PositiveSmallIntegerField()
 
@@ -48,8 +48,8 @@ class Sale(models.Model):
 		related_name="sale",
 		on_delete=models.PROTECT
 	)
-	sales_person = models.ForeignKey(
-		SalesPerson,
+	employee = models.ForeignKey(
+		Employee,
 		related_name="sale",
 		on_delete=models.PROTECT
 	)

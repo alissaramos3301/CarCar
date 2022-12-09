@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-class SalesPersonHistory extends React.Component {
+class EmployeeHistory extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
@@ -26,11 +26,11 @@ class SalesPersonHistory extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="shadow p-4 mt-4">
-							<h3>Sales Person History</h3>
+							<h3>Employee History</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
-                                        <th>Sales Person</th>
+                                        <th>Employee</th>
                                         <th>Customer</th>
                                         {/* <th>VIN</th> */}
                                         {/* <th>Sale Price</th> */}
@@ -62,4 +62,4 @@ class SalesPersonHistory extends React.Component {
         );
     };
 }
-export default SalesPersonHistory;
+export default EmployeeHistory;

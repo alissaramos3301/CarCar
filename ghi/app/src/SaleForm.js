@@ -12,7 +12,7 @@ class SalesForm extends React.Component {
     this.state = {
         auto: "",
         employee_number: "",
-        // customer: "",
+        customer: "",
         price: "",
         customers: [],
         autos: [],
@@ -80,12 +80,12 @@ class SalesForm extends React.Component {
                                     <option value="automobile">Choose an automobile</option>
                                     {this.state.autos.map((auto) => {
                                         return (
-                                        <option key={auto.id} value={auto.id}>{auto.name} </option>
+                                        <option key={auto.vin} value={auto.vin}>{auto.name} </option>
                                         )})}
                                 </select>
                             </div>
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.employee_number} placeholder="Sales Person" required type="text" name="employee" id="employee" className="form-select">
+                                <select onChange={this.handleChange} value={this.state.employee_number} placeholder="Employee" required type="text" name="employee" id="employee" className="form-select">
                                     <option value="employee">Choose a sale person</option>
                                     {this.state.employees.map((employee) => {
                                         return (

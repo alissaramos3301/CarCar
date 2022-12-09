@@ -8,9 +8,9 @@ import AutomobileForm from './AutomobileForm';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelsForm from './VehicleModelsForm';
 import SalesList from './SalesList';
-import SalesPersonList from './SalesPersonHistory';
+import EmployeeList from './EmployeeHistory';
 import SalesForm from './SaleForm';
-import SalesPersonForm from './SalesPersonForm';
+import EmployeeForm from './EmployeeForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 
@@ -39,8 +39,8 @@ function App(props) {
 			<Route path="automobiles/new" element={<AutomobileForm />} />
 			<Route path="sales" element={<SalesList />} />
 			<Route path="sales/new" element={<SalesForm />} />
-			<Route path="seller" element={<SalesPersonList />} />
-			<Route path="seller/new" element={<SalesPersonForm />} />
+			<Route path="seller" element={<EmployeeList />} />
+			<Route path="seller/new" element={<EmployeeForm />} />
 			<Route path="customers" element={<CustomerList />} />
 			<Route path='models/new' element={<VehicleModelsForm />} />
 			<Route path='manufacturers/new' element={<ManufacturerForm />} />

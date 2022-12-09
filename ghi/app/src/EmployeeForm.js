@@ -6,7 +6,7 @@ function withNavigate(Component) {
 		useNavigate={useNavigate()}
 		/>;
 }
-class SalesPersonForm extends React.Component {
+class EmployeeForm extends React.Component {
 	constructor(props) {
 	super(props);
 	this.state = {
@@ -94,4 +94,4 @@ class SalesPersonForm extends React.Component {
 	}
 }
 
-export default withNavigate(SalesPersonForm);
+export default withNavigate(EmployeeForm);
