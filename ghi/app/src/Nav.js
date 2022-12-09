@@ -23,34 +23,31 @@ function Nav() {
 					<NavLink className="nav-link" to="/automobiles">Automobiles</NavLink>
 				</li>
 				<li className="nav-item">
-					<NavLink className="nav-link" to="/automobiles/new">Add Automobiles</NavLink>
-				</li>
-				<li className="nav-item">
 					<NavLink className="nav-link" to="/sales">Sales</NavLink>
 				</li>
 				<li className="nav-item">
-					<NavLink className="nav-link" to="/sales/new">Add Sale</NavLink>
+				<NavLink className="nav-link" to="/customers">Customers</NavLink>
 				</li>
 				<li className="nav-item">
 					<NavLink className="nav-link" to="/seller">Sales Person</NavLink>
+				</li>
+				<li className="nav-item">
+					<NavLink className="nav-link" to="/automobiles/new">Add Automobiles</NavLink>
+				</li>
+				<li className="nav-item">
+					<NavLink className="nav-link" to="/manufacturers/new">Add Manufacturers</NavLink>
+				</li>
+				<li className="nav-item">
+					<NavLink className="nav-link" to="/models/new">Add Vehicle Model</NavLink>
+				</li>
+				<li className="nav-item">
+					<NavLink className="nav-link" to="/sales/new">Add Sale</NavLink>
 				</li>
 				<li className="nav-item">
 					<NavLink className="nav-link" to="/seller/new">Add Sales Person</NavLink>
 				</li>
 				<li className="nav-item">
 					<NavLink className="nav-link" to="/customers/new">Add Customer</NavLink>
-				</li>
-				<li className="nav-item">
-				<NavLink className="nav-link" to="/automobiles/new">Add Automobiles</NavLink>
-				</li>
-				<li className="nav-item">
-				<NavLink className="nav-link" to="/manufacturers/new">Add Manufacturers</NavLink>
-				</li>
-				<li className="nav-item">
-				<NavLink className="nav-link" to="/models/new">Add Vehicle Model</NavLink>
-				</li>
-				<li className="nav-item">
-				<NavLink className="nav-link" to="/customers">Customers</NavLink>
 				</li>
 			</ul>
 			</div>

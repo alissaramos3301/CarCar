@@ -11,9 +11,9 @@ class SalesForm extends React.Component {
     super(props);
     this.state = {
         auto: "",
-        // employee_number: "",
-        // customer: "",
-        // price: "",
+        employee_number: "",
+        customer: "",
+        price: "",
         customers: [],
         autos: [],
         employees: []
@@ -60,9 +60,9 @@ class SalesForm extends React.Component {
             // console.log(newSale)
             const cleared = {
                 auto: '',
-                // employee_number: '',
-                // customer: '',
-                // price: '',
+                employee_number: '',
+                customer: '',
+                price: '',
             }
             // this.setState(cleared)
             this.props.useNavigate("/sales/new/")
@@ -76,7 +76,7 @@ class SalesForm extends React.Component {
                         <h1>Record a new Sale</h1>
                         <form onSubmit={this.handleSubmit} id="create-sale-form">
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.auto} placeholder="Automobile" required type="text" value={this.state.auto_id} name="automobile" id="automobile" className="form-select">
+                                <select onChange={this.handleChange} value={this.state.auto} placeholder="Automobile" required type="text" name="automobile" id="automobile" className="form-select">
                                     <option value="automobile">Choose an automobile</option>
                                     {this.state.autos.map((auto) => {
                                         return (
@@ -85,7 +85,7 @@ class SalesForm extends React.Component {
                                 </select>
                             </div>
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.employee_number} placeholder="Sales Person" required type="text" value={this.state.employee_number} name="employee" id="employee" className="form-select">
+                                <select onChange={this.handleChange} value={this.state.employee_number} placeholder="Sales Person" required type="text" name="employee" id="employee" className="form-select">
                                     <option value="employee">Choose a sale person</option>
                                     {this.state.employees.map((employee) => {
                                         return (
@@ -94,7 +94,7 @@ class SalesForm extends React.Component {
                                 </select>
                             </div>
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.customer} placeholder="Customer" required type="text" value={this.state.customer} name="customer" id="customer" className="form-select">
+                                <select onChange={this.handleChange} value={this.state.customer} placeholder="Customer" required type="text" name="customer" id="customer" className="form-select">
                                     <option value="customer">Choose a customer</option>
                                     {this.state.customers.map((customer) => {
                                         return (
