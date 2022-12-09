@@ -26,7 +26,7 @@ class EmployeeHistory extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="shadow p-4 mt-4">
-							<h3>Employee History</h3>
+							<h3>Employee Sales History</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
@@ -34,7 +34,7 @@ class EmployeeHistory extends React.Component {
                                         <th>Customer</th>
                                         {/* <th>VIN</th> */}
                                         {/* <th>Sale Price</th> */}
-                                        <th>Payment Method</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +45,7 @@ class EmployeeHistory extends React.Component {
 												<td>{employee.name}</td>
 												{/* <td>{employee.vin}</td> */}
 												{/* <td>{employee.id}</td> */}
-												<td>Cash or Card</td>
+												<td>Sold or Available</td>
                                             </tr>
                                         );
                                     })}

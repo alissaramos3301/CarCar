@@ -64,8 +64,8 @@ class SalesForm extends React.Component {
                 customer: '',
                 price: '',
             }
-            // this.setState(cleared)
-            this.props.useNavigate("/sales/new/")
+            this.setState(cleared)
+            this.props.useNavigate("/sales/")
         }
     }
     render() {

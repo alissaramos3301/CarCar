@@ -12,8 +12,6 @@ class EmployeeForm extends React.Component {
 	this.state = {
 		name: "",
 		employee_number: "",
-		age: "",
-		hire_date: "",
 		// employees: []
 	};
 
@@ -41,7 +39,7 @@ class EmployeeForm extends React.Component {
 		const data = { ...this.state };
 
 		console.log(data)
-		const url = "http://localhost:8090/api/sales/";
+		const url = "http://localhost:8090/api/employees/";
 		const fetchConfig = {
 			method: "post",
 			body: JSON.stringify(data),
@@ -54,10 +52,8 @@ class EmployeeForm extends React.Component {
 			this.setState({
 				name: "",
 				employee_number: "",
-				age: "",
-				hire_date: "",
 			});
-			this.props.useNavigate("/sales/");
+			this.props.useNavigate("/employees/");
 		}
 		// const newEmployee = await response.json();
 		// this.setState({ employee: newEmployee.employees})
@@ -67,7 +63,7 @@ class EmployeeForm extends React.Component {
 			<div className="row">
 				<div className="offset-3 col-6">
 					<div className="shadow p-4 mt-4">
-						<h1>Welcome to Sales</h1>
+						<h1>Employee Form</h1>
 						<form onSubmit={this.handleSubmit} id="create-employee-form">
 							<div className="form-floating mb-3">
 								<input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
@@ -76,14 +72,6 @@ class EmployeeForm extends React.Component {
 							<div className="form-floating mb-3">
 								<input onChange={this.handleChange} value={this.state.employee_number} placeholder="Employee Number" required type="number" name="employee_number" id="employee_number" className="form-control" />
 								<label htmlFor="employee_number">Employee Number</label>
-							</div>
-							<div className="form-floating mb-3">
-								<input onChange={this.handleChange} value={this.state.age} placeholder="Age" required type="number" name="age" id="age" className="form-control" />
-								<label htmlFor="age">Age</label>
-							</div>
-							<div className="form-floating mb-3">
-								<input onChange={this.handleChange} value={this.state.hire_date} placeholder="Hire Date" required type="date" name="hire_date" id="hire_date" className="form-control" />
-								<label htmlFor="hire_date">Hire Date</label>
 							</div>
 						<button className="btn btn-primary">Welcome!</button>
 						</form>
