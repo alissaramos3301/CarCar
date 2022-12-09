@@ -5,18 +5,18 @@ class EmployeeHistory extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
-				sellers: [],
+				employees: [],
 			};
 		}
 
 	async componentDidMount() {
-		const url = 'http://localhost:8090/api/sellers/';
+		const url = 'http://localhost:8090/api/employees/';
 
 		const response = await fetch(url);
 
 		if (response.ok) {
 			const data = await response.json();
-			this.setState({ sellers: data.sellers });
+			this.setState({ employees: data.employees });
 
 		}
 	}
@@ -38,13 +38,13 @@ class EmployeeHistory extends React.Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.sellers.map(seller => {
+                                    {this.state.employees.map(employee => {
                                         return (
-                                            <tr key={seller.name}>
-												<td>{seller.name}</td>
-												<td>{seller.name}</td>
-												{/* <td>{seller.vin}</td> */}
-												{/* <td>{seller.id}</td> */}
+                                            <tr key={employee.name}>
+												<td>{employee.name}</td>
+												<td>{employee.name}</td>
+												{/* <td>{employee.vin}</td> */}
+												{/* <td>{employee.id}</td> */}
 												<td>Cash or Card</td>
                                             </tr>
                                         );

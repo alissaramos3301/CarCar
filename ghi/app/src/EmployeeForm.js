@@ -14,7 +14,7 @@ class EmployeeForm extends React.Component {
 		employee_number: "",
 		age: "",
 		hire_date: "",
-		// sellers: []
+		// employees: []
 	};
 
 	this.handleChange = this.handleChange.bind(this);
@@ -32,7 +32,7 @@ class EmployeeForm extends React.Component {
 	// 	const response = await fetch(url);
 	// 	if (response.ok) {
 	// 		const data = await response.json();
-	// 		this.setState({seller: data.seller})
+	// 		this.setState({employee: data.employee})
 	// 	}
 	// }
 
@@ -41,7 +41,7 @@ class EmployeeForm extends React.Component {
 		const data = { ...this.state };
 
 		console.log(data)
-		const sellersUrl = "http://localhost:8090/api/sales/";
+		const url = "http://localhost:8090/api/sales/";
 		const fetchConfig = {
 			method: "post",
 			body: JSON.stringify(data),
@@ -49,7 +49,7 @@ class EmployeeForm extends React.Component {
 				'Content-Type': 'application/json',
 			},
 		};
-		const response = await fetch(sellersUrl, fetchConfig);
+		const response = await fetch(url, fetchConfig);
 		if (response.ok) {
 			this.setState({
 				name: "",
@@ -59,8 +59,8 @@ class EmployeeForm extends React.Component {
 			});
 			this.props.useNavigate("/sales/");
 		}
-		// const newSeller = await response.json();
-		// this.setState({ seller: newSeller.sellers})
+		// const newEmployee = await response.json();
+		// this.setState({ employee: newEmployee.employees})
 	}
 	render() {
 		return (
@@ -68,7 +68,7 @@ class EmployeeForm extends React.Component {
 				<div className="offset-3 col-6">
 					<div className="shadow p-4 mt-4">
 						<h1>Welcome to Sales</h1>
-						<form onSubmit={this.handleSubmit} id="create-seller-form">
+						<form onSubmit={this.handleSubmit} id="create-employee-form">
 							<div className="form-floating mb-3">
 								<input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
 								<label htmlFor="color">Full Name</label>

@@ -10,7 +10,7 @@ class SaleEncoder(ModelEncoder):
 	model = Sale
 	properties = [
 		'id',
-		'seller',
+		'employee',
 		'employee_number',
 		'customer',
 		'price',
@@ -176,68 +176,68 @@ def api_show_customer(request,pk):
 			return response
 
 @require_http_methods(["GET", "POST"])
-def api_list_sellers(request):
+def api_list_employees(request):
 	if request.method == "GET":
-		sellers = Employee.objects.all()
+		employees = Employee.objects.all()
 		return JsonResponse(
-			{"sellers": sellers},
+			{"employees": employees},
 			encoder=EmployeeEncoder,
 		)
 	else:
 		# try:
 		content = json.loads(request.body)
 		# print("content: " + content)
-		seller = Employee.objects.create(**content)
-		# print("seller: " + seller)
+		employee = Employee.objects.create(**content)
+		# print("employee: " + employee)
 		return JsonResponse(
-			seller,
+			employee,
 			encoder=EmployeeEncoder,
 			safe=False,
 		)
 		# except:
 		# 	response = JsonResponse(
-		# 		{"message": "Could not add seller"}
+		# 		{"message": "Could not add employee"}
 		# 	)
 		# 	response.status_code = 400
 		# 	return response
 
 @require_http_methods(["DELETE", "GET", "PUT"])
-def api_show_seller(request,pk):
+def api_show_employee(request,pk):
 	if request.method == "GET":
 		try:
-			seller = Employee.objects.get(id=pk)
+			employee = Employee.objects.get(id=pk)
 			return JsonResponse(
-				seller,
+				employee,
 				encoder=EmployeeEncoder,
 				safe=False
 			)
 		except Employee.DoesNotExist:
-			response = JsonResponse({"message": "The seller does not exist"})
+			response = JsonResponse({"message": "The employee does not exist"})
 			response.status_code = 404
 			return response
 	elif request.method == "DELETE":
 		try:
-			seller = Employee.objects.get(id=pk)
-			seller.delete()
+			employee = Employee.objects.get(id=pk)
+			employee.delete()
 			return JsonResponse(
-				seller,
+				employee,
 				encoder=EmployeeEncoder,
 				safe=False
 			)
 		except Employee.DoesNotExist:
-			return JsonResponse({"message": "Seller not exist"})
+			return JsonResponse({"message": "Employee not exist"})
 	else:
 		try:
 			content = json.loads(request.body)
-			seller = Employee.objects.get(id=pk)
+			employee = Employee.objects.get(id=pk)
 
 			props = ["name"]
 			for prop in props:
 				if prop in content:
-					setattr(seller, prop, content[prop])
-			seller.save()
+					setattr(employee, prop, content[prop])
+			employee.save()
 			return JsonResponse(
-				seller,
+				employee,
 				encoder=EmployeeEncoder,
 				safe=False,
 			)

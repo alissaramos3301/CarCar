@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 ('price', models.PositiveIntegerField()),
                 ('automobile', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='auto', to='sales_rest.automobilevo')),
                 ('customer', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='customer', to='sales_rest.customer')),
-                ('sales_person', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='seller', to='sales_rest.salesperson')),
+                ('sales_person', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='employee', to='sales_rest.salesperson')),
             ],
         ),
     ]
