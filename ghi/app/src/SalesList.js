@@ -41,9 +41,9 @@ class SalesList extends React.Component {
                                         return (
                                             <tr key={sale.id}>
 												<td>{sale.name}</td>
-												{/* <td>{sales.name}</td>
-												<td>{sales.name}</td>
-												<td>{sales.name}</td> */}
+												<td>{sale.name}</td>
+												<td>{sale.name}</td>
+												<td>{sale.name}</td>
 												<td>Cash or Card</td>
                                             </tr>
                                         );

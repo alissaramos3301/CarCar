@@ -12,7 +12,7 @@ class SalesForm extends React.Component {
     this.state = {
         auto: "",
         employee_number: "",
-        customer: "",
+        // customer: "",
         price: "",
         customers: [],
         autos: [],
@@ -25,7 +25,7 @@ class SalesForm extends React.Component {
 
     handleChange(event) {
         const newState = {}
-        const value = event.target.value;
+        newState[event.target.name] = event.target.value;
         this.setState({ newState });
     }
 
@@ -115,4 +115,4 @@ class SalesForm extends React.Component {
     }
 }
 
-export default SalesForm;
+export default withNavigate(SalesForm);
