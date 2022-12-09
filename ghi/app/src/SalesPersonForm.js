@@ -1,67 +1,66 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom'
 
+function withNavigate(Component) {
+	return (props) => <Component {...props}
+		useNavigate={useNavigate()}
+		/>;
+}
 class SalesPersonForm extends React.Component {
 	constructor(props) {
 	super(props);
 	this.state = {
-		color: "",
-		year: "",
-		vin: "",
-		model_id: "",
-		models: []
+		name: "",
+		employee_number: "",
+		age: "",
+		hire_date: "",
+		// sellers: []
 	};
 
-	this.handleTestChange = this.handleTestChange.bind(this);
+	this.handleChange = this.handleChange.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleTestChange(event) {
-	const value = event.target.value;
-	this.setState({ test: value });
+	handleChange(event) {
+	const newState = {}
+	newState[event.target.name] = event.target.value;
+	this.setState(newState);
 	}
 
-	async fetchModel() {
-	const res = await fetch('http://localhost:8100/api/models');
-	const newModel = await res.json();
-
-	this.setState({ models: newModel.models })
-	}
-
-	componentDidMount() {
-	this.fetchModel()
-	}
-
+	// async componentDidMount() {
+	// 	const url = 'http://localhost:8090/api/sales/'
+	// 	const response = await fetch(url);
+	// 	if (response.ok) {
+	// 		const data = await response.json();
+	// 		this.setState({seller: data.seller})
+	// 	}
+	// }
 
 	async handleSubmit(event) {
-	event.preventDefault();
-	const data = { ...this.state };
-	delete data.models;
+		event.preventDefault();
+		const data = { ...this.state };
 
-	console.log(data)
-	const ModelsUrl = "http://localhost:8100/api/automobiles/";
-	const fetchConfig = {
-		method: "post",
-		body: JSON.stringify(data),
-		headers: {
-		'Content-Type': 'application/json',
-		},
-	};
-
-    const response = await fetch(ModelsUrl, fetchConfig);
-
-    if (response.ok) {
-		const newModels = await response.json();
-		console.log(newModels)
-		const cleared = {
-		color: '',
-		year: '',
-		vin: '',
-		model_id: '',
+		console.log(data)
+		const sellersUrl = "http://localhost:8090/api/sales/";
+		const fetchConfig = {
+			method: "post",
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		};
+		const response = await fetch(sellersUrl, fetchConfig);
+		if (response.ok) {
+			this.setState({
+				name: "",
+				employee_number: "",
+				age: "",
+				hire_date: "",
+			});
+			this.props.useNavigate("/sales/");
 		}
-		this.setState(cleared)
-
-
-	}
+		// const newSeller = await response.json();
+		// this.setState({ seller: newSeller.sellers})
 	}
 	render() {
 		return (
@@ -69,28 +68,22 @@ class SalesPersonForm extends React.Component {
 				<div className="offset-3 col-6">
 					<div className="shadow p-4 mt-4">
 						<h1>Welcome to Sales</h1>
-						<form onSubmit={this.handleTestChange} id="create-employee-form">
+						<form onSubmit={this.handleSubmit} id="create-seller-form">
 							<div className="form-floating mb-3">
-								<input onChange={this.handleTestChange} value={this.state.color} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
+								<input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
 								<label htmlFor="color">Full Name</label>
 							</div>
 							<div className="form-floating mb-3">
-								<input onChange={this.handleTestChange} value={this.state.year} placeholder="Year" required type="text" name="year" id="year" className="form-control" />
-								<label htmlFor="year">Position</label>
+								<input onChange={this.handleChange} value={this.state.employee_number} placeholder="Employee Number" required type="number" name="employee_number" id="employee_number" className="form-control" />
+								<label htmlFor="employee_number">Employee Number</label>
 							</div>
 							<div className="form-floating mb-3">
-								<input onChange={this.handleTestChange} placeholder="Age" required type="number" name="age" id="age" className="form-control" />
+								<input onChange={this.handleChange} value={this.state.age} placeholder="Age" required type="number" name="age" id="age" className="form-control" />
 								<label htmlFor="age">Age</label>
 							</div>
 							<div className="form-floating mb-3">
-								<select onChange={this.handleTestChange} placeholder="Model" required type="text" value={this.state.model_id} name="model" id="model" className="form-select">
-									<option value="model">Hire Date</option>
-									{this.state.models.map((mod) => {
-										return (
-											<option key={mod.id} value={mod.id}>{mod.name} </option>
-										)
-									})}
-								</select>
+								<input onChange={this.handleChange} value={this.state.hire_date} placeholder="Hire Date" required type="date" name="hire_date" id="hire_date" className="form-control" />
+								<label htmlFor="hire_date">Hire Date</label>
 							</div>
 						<button className="btn btn-primary">Welcome!</button>
 						</form>
@@ -101,4 +94,4 @@ class SalesPersonForm extends React.Component {
 	}
 }
 
-export default SalesPersonForm;
+export default withNavigate(SalesPersonForm);

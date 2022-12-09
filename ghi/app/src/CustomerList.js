@@ -1,23 +1,22 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-class AutomobilesList extends React.Component {
+class CustomerList extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
-				autos: [],
+				customers: [],
 			};
 		}
 
 	async componentDidMount() {
-		const url = 'http://localhost:8100/api/automobiles/';
+		const url = 'http://localhost:8090/api/customers/';
 
 		const response = await fetch(url);
 
 		if (response.ok) {
 			const data = await response.json();
-			this.setState({ autos: data.autos });
-
+			this.setState({ customers: data.customers });
 		}
 	}
 	render() {
@@ -26,40 +25,32 @@ class AutomobilesList extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="shadow p-4 mt-4">
-							<h3>Automobiles</h3>
+                            <h3>Customers</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
-                                        <th>VIN</th>
-                                        <th>Color</th>
-                                        <th>Year</th>
-                                        <th>Model</th>
-                                        <th>Manufacturer</th>
+                                        <th>Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.autos.map(auto => {
+                                    {this.state.customers.map(customer => {
                                         return (
-                                            <tr key={auto.vin}>
-												<td>{auto.vin}</td>
-												<td>{auto.color}</td>
-												<td>{auto.year}</td>
-												<td>{auto.model.name}</td>
-												<td>{auto.model.manufacturer.name}</td>
+                                            <tr key={customer.id}>
+                                                <td>{customer.name}</td>
                                             </tr>
                                         );
                                     })}
                                 </tbody>
                             </table>
                             <div>
-                                <Link to="/automobiles/new"
-                                className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">New Automobile</Link>
+                                <Link to="/customers/new"
+                                className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">New Customer</Link>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     };
 }
-export default AutomobilesList;
+export default CustomerList;

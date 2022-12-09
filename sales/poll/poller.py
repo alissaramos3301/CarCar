@@ -14,7 +14,7 @@ django.setup()
 # from sales_rest.models import AutoVO
 
 # def get_automobile():
-#     url = "http://wardrobe-api:8000/api/automobile/"
+#     url = "http://inventory-api:8000/api/automobile/"
 #     response = requests.get(url)
 #     content = json.loads(response.content)
 #     print(content)

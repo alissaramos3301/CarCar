@@ -12,6 +12,7 @@ import SalesPersonList from './SalesPersonHistory';
 import SalesForm from './SaleForm';
 import SalesPersonForm from './SalesPersonForm';
 import CustomerForm from './CustomerForm';
+import CustomerList from './CustomerList';
 
 function App(props) {
   // if (props.manufacturers === undefined && props.automobiles === undefined && props.models === undefined) {
@@ -22,7 +23,16 @@ function App(props) {
 		<Nav />
 		<div className="container">
 		<Routes>
-			<Route path="/" element={<MainPage />} />
+			<Route path="/" element={<MainPage />}>
+				<Route
+					path='*'
+					element={
+						<main style={{ padding: '1rem' }}>
+							<p>Nothing to see here!</p>
+						</main>
+					}
+					/>
+			</Route>
 			<Route path="manufacturers" element={<ManufacturersList />} />
 			<Route path="models" element={<VehicleModelsList />} />
 			<Route path="automobiles" element={<AutomobilesList />} />
@@ -31,9 +41,10 @@ function App(props) {
 			<Route path="sales/new" element={<SalesForm />} />
 			<Route path="seller" element={<SalesPersonList />} />
 			<Route path="seller/new" element={<SalesPersonForm />} />
-			<Route path="customers" element={<CustomerForm />} />
+			<Route path="customers" element={<CustomerList />} />
 			<Route path='models/new' element={<VehicleModelsForm />} />
 			<Route path='manufacturers/new' element={<ManufacturerForm />} />
+			<Route path='customers/new' element={<CustomerForm />} />
 		</Routes>
 		</div>
 	</BrowserRouter>

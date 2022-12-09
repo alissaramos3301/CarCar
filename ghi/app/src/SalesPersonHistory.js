@@ -5,18 +5,18 @@ class SalesPersonHistory extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
-				autos: [],
+				sellers: [],
 			};
 		}
 
 	async componentDidMount() {
-		const url = 'http://localhost:8100/api/automobiles/';
+		const url = 'http://localhost:8090/api/sellers/';
 
 		const response = await fetch(url);
 
 		if (response.ok) {
 			const data = await response.json();
-			this.setState({ autos: data.autos });
+			this.setState({ sellers: data.sellers });
 
 		}
 	}
@@ -32,19 +32,19 @@ class SalesPersonHistory extends React.Component {
                                     <tr>
                                         <th>Sales Person</th>
                                         <th>Customer</th>
-                                        <th>VIN</th>
-                                        <th>Sale Price</th>
+                                        {/* <th>VIN</th> */}
+                                        {/* <th>Sale Price</th> */}
                                         <th>Payment Method</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.autos.map(auto => {
+                                    {this.state.sellers.map(seller => {
                                         return (
-                                            <tr key={auto.vin}>
-												<td>{auto.model.name}</td>
-												<td>{auto.model.name}</td>
-												<td>{auto.vin}</td>
-												<td>{auto.id}</td>
+                                            <tr key={seller.name}>
+												<td>{seller.name}</td>
+												<td>{seller.name}</td>
+												{/* <td>{seller.vin}</td> */}
+												{/* <td>{seller.id}</td> */}
 												<td>Cash or Card</td>
                                             </tr>
                                         );
@@ -52,7 +52,7 @@ class SalesPersonHistory extends React.Component {
                                 </tbody>
                             </table>
                             <div>
-                                <Link to="/automobiles/new"
+                                <Link to="/sales/new"
                                 className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">Add a Personal Sale</Link>
                             </div>
                         </div>
