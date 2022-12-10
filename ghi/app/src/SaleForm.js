@@ -33,6 +33,9 @@ class SaleForm extends React.Component {
         autos: [],
         employees: []
     };
+    this.handleCustomerChange = this.handleCustomerChange.bind(this);
+    this.handleAutoChange = this.handleAutoChange.bind(this);
+    this.handleEmployeeChange = this.handleEmployeeChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -52,6 +55,18 @@ class SaleForm extends React.Component {
         const newState = {}
         newState[event.target.name] = event.target.value;
         this.setState({ newState });
+    }
+    handleCustomerChange(event) {
+        const value = event.target.value;
+        this.setState({ customer: value})
+    }
+    handleAutoChange(event) {
+        const value = event.target.value;
+        this.setState({ auto: value})
+    }
+    handleEmployeeChange(event) {
+        const value = event.target.value;
+        this.setState({ employee: value})
     }
 
     // async componentDidMount() {
@@ -111,7 +126,7 @@ class SaleForm extends React.Component {
             // console.log(newSale)
             const cleared = {
                 auto: '',
-                employee_number: '',
+                employee: '',
                 customer: '',
                 price: '',
             }
@@ -125,18 +140,19 @@ class SaleForm extends React.Component {
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
                         <h1>Record a new Sale</h1>
-                        <form onSubmit={this.handleSubmit} id="create-sale-form">
+                        <form onSubmit={this.handleSubmit} multiple={true} id="create-sale-form">
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.auto} placeholder="Automobile" required type="text" name="automobile" id="automobile" className="form-select">
+                                <select onChange={this.handleAutoChange} value={this.state.auto} placeholder="Automobile" required type="text" name="automobile" id="automobile" className="form-select">
                                     <option value="automobile">Choose an automobile</option>
                                     {this.state.autos.map((auto) => {
                                         return (
                                         <option key={auto.vin} value={auto.vin}>{auto.model.name} </option>
+                                        // <option key={auto.model.name} value={auto.vin}>{auto.model.name} </option>
                                         )})}
                                 </select>
                             </div>
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.employee} placeholder="Employee" required type="text" name="employee" id="employee" className="form-select">
+                                <select onChange={this.handleEmployeeChange} value={this.state.employee} placeholder="Employee" required type="text" name="employee" id="employee" className="form-select">
                                     <option value="employee">Choose an employee</option>
                                     {this.state.employees.map((employee) => {
                                         return (
@@ -145,7 +161,7 @@ class SaleForm extends React.Component {
                                 </select>
                             </div>
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.customer} placeholder="Customer" required type="text" name="customer" id="customer" className="form-select">
+                                <select onChange={this.handleCustomerChange} value={this.state.customer} placeholder="Customer" required type="text" name="customer" id="customer" className="form-select">
                                     <option value="customer">Choose a customer</option>
                                     {this.state.customers.map((customer) => {
                                         return (
