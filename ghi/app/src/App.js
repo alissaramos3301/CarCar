@@ -9,7 +9,7 @@ import ManufacturerForm from './ManufacturerForm';
 import VehicleModelsForm from './VehicleModelsForm';
 import SalesList from './SalesList';
 import EmployeeList from './EmployeeHistory';
-import SalesForm from './SaleForm';
+import SaleForm from './SaleForm';
 import EmployeeForm from './EmployeeForm';
 import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
@@ -38,7 +38,7 @@ function App(props) {
 			<Route path="automobiles" element={<AutomobilesList />} />
 			<Route path="automobiles/new" element={<AutomobileForm />} />
 			<Route path="sales" element={<SalesList />} />
-			<Route path="sales/new" element={<SalesForm />} />
+			<Route path="sales/new" element={<SaleForm />} />
 			<Route path="employee" element={<EmployeeList />} />
 			<Route path="employee/new" element={<EmployeeForm />} />
 			<Route path="customers" element={<CustomerList />} />

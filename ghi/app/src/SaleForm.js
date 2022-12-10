@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 
 function withNavigate(Component) {
@@ -6,9 +6,24 @@ function withNavigate(Component) {
 		useNavigate={useNavigate()}
 		/>;
 }
-class SalesForm extends React.Component {
+
+
+class SaleForm extends React.Component {
     constructor(props) {
     super(props);
+    // const data = {
+    //     auto: "",
+    //     employee: "",
+    //     // employee_number: "",
+    //     customer: "",
+    //     // price: "",
+    //     customers: [],
+    //     autos: [],
+    //     employees: []
+    // }
+    // this.state = {
+    //     mergedData: this.props.data
+    // }
     this.state = {
         auto: "",
         employee_number: "",
@@ -18,10 +33,20 @@ class SalesForm extends React.Component {
         autos: [],
         employees: []
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     }
+    // componentDidMount = () => {
+    //     Promise.all([
+    //         fetch(this.props.autos).then(response => response.json()),
+    //         fetch(this.props.customers).then(response => response.json()),
+    //         fetch(this.props.employees).then(response => response.json()),
+    //     ]).then(([auto, customer, employee]) => {
+    //         this.setState({
+    //             mergedData: auto.concat(customer,employee)
+    //         });
+    //     })
+    // }
 
     handleChange(event) {
         const newState = {}
@@ -29,14 +54,40 @@ class SalesForm extends React.Component {
         this.setState({ newState });
     }
 
-    async componentDidMount() {
-		const url = 'http://localhost:8090/api/sales/'
-		const response = await fetch(url);
-		if (response.ok) {
-			const data = await response.json();
-			this.setState({sale: data.sale})
-		}
-	}
+    // async componentDidMount() {
+		// const url = 'http://localhost:8090/api/sales/'
+		// const response = await fetch(url);
+		// if (response.ok) {
+		// 	const data = await response.json();
+		// 	this.setState({sale: data.sale})
+		// }
+	// }
+
+    async fetchAuto() {
+        const response = await fetch('http://localhost:8100/api/automobiles');
+        const newAuto = await response.json();
+
+        this.setState({ autos: newAuto.autos })
+    }
+    async fetchEmployee() {
+        const response = await fetch('http://localhost:8090/api/employees');
+        const newEmployee = await response.json();
+
+        this.setState({ employees: newEmployee.employees })
+    }
+    async fetchCustomer() {
+        const response = await fetch('http://localhost:8090/api/customers');
+        const newCustomer = await response.json();
+
+        this.setState({ customers: newCustomer.customers })
+    }
+    componentDidMount() {
+        this.fetchAuto()
+        this.fetchEmployee()
+        this.fetchCustomer()
+    }
+
+
 
 
     async handleSubmit(event) {
@@ -80,13 +131,13 @@ class SalesForm extends React.Component {
                                     <option value="automobile">Choose an automobile</option>
                                     {this.state.autos.map((auto) => {
                                         return (
-                                        <option key={auto.vin} value={auto.vin}>{auto.name} </option>
+                                        <option key={auto.vin} value={auto.vin}>{auto.model.name} </option>
                                         )})}
                                 </select>
                             </div>
                             <div className="form-floating mb-3">
-                                <select onChange={this.handleChange} value={this.state.employee_number} placeholder="Employee" required type="text" name="employee" id="employee" className="form-select">
-                                    <option value="employee">Choose a sale person</option>
+                                <select onChange={this.handleChange} value={this.state.employee} placeholder="Employee" required type="text" name="employee" id="employee" className="form-select">
+                                    <option value="employee">Choose an employee</option>
                                     {this.state.employees.map((employee) => {
                                         return (
                                         <option key={employee.id} value={employee.id}>{employee.name} </option>
@@ -115,4 +166,14 @@ class SalesForm extends React.Component {
     }
 }
 
-export default withNavigate(SalesForm);
+export default withNavigate(SaleForm);
+
+
+// const SaleForm = () => {
+
+//     const [autos, setAutos] = useState([])
+
+//     const [customers, setCustomers] = useState([])
+
+//     const [employees, setEmployees] = useState([])
+// }
