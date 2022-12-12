@@ -115,12 +115,13 @@ class SaleForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const {auto, employee, customer, price} = this.state
-        // const auto =,this.data.auto
+        // const auto =this.data.auto
         // const { auto } = this.data
         const data = { auto, employee, customer, price };
         // const data = { auto: this.data.auto, employee: this.data.employee }
         // const data = { auto, employee }
-
+        console.log('console logging data under handleSubmit')
+        console.log(data)
         const url = "http://localhost:8090/api/sales/";
         const fetchConfig = {
             method: "post",
@@ -133,7 +134,8 @@ class SaleForm extends React.Component {
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
             // const newSale = await response.json();
-            // console.log(newSale)
+            console.log("HERE IS THE RESPONSE IN THE FETCH")
+            console.log(response)
             this.setState({
                 auto: '',
                 employee: '',
