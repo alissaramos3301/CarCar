@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 class AutomobileVO(models.Model):
-	import_href = models.CharField(max_length=200, unique=True)
+	# import_href = models.CharField(max_length=200, unique=True)
 	vin = models.CharField(max_length=17, unique=True)
 	sold = models.BooleanField(null=True)
 
@@ -10,8 +10,8 @@ class Employee(models.Model):
 	name = models.CharField(max_length=100, unique=True)
 	employee_number = models.CharField(max_length=100, null=True, unique=True)
 
-	class Meta:
-		ordering=['employee_number']
+	# class Meta:
+		# ordering=['employee_number']
 
 class Customer(models.Model):
 	import_href = models.CharField(max_length=200, unique=True, null=True)

@@ -45,14 +45,15 @@ def api_list_sales(request):
 	else:
 		# try:
 			content = json.loads(request.body)
-			print("******HERE IS THE CONTENT:   ")
-			print(content)
 			# sale = Sale.objects.create(**content)
+			print(content)
 			employee_id = content['employee']
 			print(employee_id)
+
 			sale_employee = Employee.objects.get(employee_number=employee_id)
 			content['employee'] = sale_employee
 			print('EMPLOYEE ID #####')
+			print(employee_id)
 
 			customer_id = content['customer']
 			print(customer_id)
