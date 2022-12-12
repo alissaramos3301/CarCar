@@ -1,68 +1,109 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react'
+import { useState, useEffect } from 'react';
 
-function AppointmentHistory() {
-  const[appointments, setAppointment] = useState([])
-  const[search, setSearch] = useState('')
+export default function AppointmentHistory() {
+    const [appointments, setAppointments] = useState([]);
+    console.log(appointments)
+    const [vin, setVin] = useState([]);
 
-  const handleSetSearch = e => {
-    setSearch(e.target.value)
+    const fetchAppointments = async () => {
+        const url = 'http://localhost:8080/api/appointments/';
+        const result = await fetch(url);
+        const recordsJSON = await result.json();
+        setAppointments(recordsJSON.appointments);
+    }
+
+    const fetchVin = async () => {
+        const url = 'http://localhost:8080/api/appointments/';
+        const result = await fetch(url);
+        const recordsJSON = await result.json();
+        setVin(recordsJSON.appointments.vin);
+    }
+
+    useEffect(() => {
+        fetchAppointments()
+    }, []);
+
+    useEffect(() => {
+        fetchVin()
+    }, []);
+
+    async function deleteAppointment(id) {
+      const url = `http://localhost:8080/api/appointments/`;
+      const result = await fetch(url, { method: 'DELETE' });
+      if (result.ok) {
+          setAppointments(appointments.filter((appointment) => appointment.id != id));
+      }
   }
 
-  async function fetchAppointment(){
-    const res = await fetch('http://localhost:8080/api/appointments');
-    const getData = await res.json();
-    const appointmentArray = getData.appointments
-    const result = appointmentArray.filter(item => item.vin.vin === search)
-    setAppointment(result)
+  async function completeAppointment(id) {
+      const data = { is_complete: "True" }
+      const url = `http://localhost:8080/api/appointments/`;
+      const fetchConfig = {
+          method: "PUT",
+          body: JSON.stringify(data),
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      };
+      const result = await fetch(url, fetchConfig);
+      if (result.ok) {
+          setAppointments(appointments.filter((appointment) => appointment.id != id));
+      }
+
   }
 
-  useEffect(()=> {
-    fetchAppointment()
-  },[])
-
-
-  return(
-        <>
-        <br></br>
-            <div className="input-group">
-            <input type="text" value={search} onChange={handleSetSearch} className="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <button type="button" onClick={fetchAppointment} className="btn btn-outline-secondary">Search VIN</button>
+    return (
+        <div className="row">
+            <div className="mt-4">
+                <h1>Service History</h1>
+                <input icon="search" type="text" className="search-input" aria-label="Default example" placeholder="Search VIN" onChange={(event) => {
+                    setVin(event.target.value);
+                }}
+                    required
+                    name="vin"
+                    id="vin"
+                />
             </div>
-              
-            <h1>Service appointments</h1>
-                <table className ="table table-striped">
-                  <thead>
-                
+            <table className="table table-striped">
+                <thead>
                     <tr>
-                      <th>VIN</th>
-                      <th>Customer name</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Technician</th>
-                      <th>Reason</th>
-                      <th>Status</th>
+                        <th>VIN</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Technician</th>
+                        <th>Reason for visit</th>
+                        <th>VIP</th>
+                        <th>Status</th>
                     </tr>
-                  </thead>
-                  <tbody>
-                  
-                    {appointments.map((each)=>{
-                      return(
-                      <tr key={each.id}>
-                      <td>{each.vin.vin}</td>
-                      <td>{each.owner}</td>
-                      <td>{each.date}</td>
-                      <td>{each.time}</td>
-                      <td>{each.technician.name}</td>
-                      <td>{each.reason}</td>
-                      <td>{each.status}</td>
-                      </tr>
-                      )
+                </thead>
+                <tbody>
+                    {appointments?.filter((appointment) => {
+                        if (appointment.vin.includes(vin)) {
+                            return appointment;
+                        } else if (vin == null) {
+                            return appointment;
+                        }
+                    }).map((appointment) => {
+                        return (
+                            <tr key={appointment.id}>
+                                <td>{appointment.vin}</td>
+                                <td>{appointment.owner}</td>
+                                <td>{appointment.date}</td>
+                                <td>{appointment.time}</td>
+                                <td>{appointment.technician.name}</td>
+                                <td>{appointment.reason}</td>
+                                <td>{appointment.vip}</td>
+                                <td>{appointment.status}
+                                  <button className="btn btn-danger" onClick={() => deleteAppointment(appointment.id)} type="button">Cancel</button>
+                                  <button className="btn btn-success" onClick={() => completeAppointment(appointment.id)} type="button">Finished</button>
+                                </td>
+                            </tr>
+                        );
                     })}
-                  
-                  </tbody>
-                </table>
-                </>
-        )
-        }
-
-export default AppointmentHistory
+                </tbody>
+            </table>
+        </div>
+    )
+}
