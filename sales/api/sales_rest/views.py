@@ -45,30 +45,47 @@ def api_list_sales(request):
 	else:
 		# try:
 			content = json.loads(request.body)
-			print("******HERE IS THE CONTENT:   ")
+			print('************************')
 			print(content)
+
+			content['employee'] = Employee.objects.get(employee_number=content['employee'])
+			content['automobile'] = AutomobileVO.objects.get(vin=content['automobile'])
+			content['customer'] = Customer.objects.get(customer=content['customer'])
+
 			# sale = Sale.objects.create(**content)
-			employee_id = content['employee']
-			print(employee_id)
-			sale_employee = Employee.objects.get(employee_number=employee_id)
-			content['employee'] = sale_employee
-			print('EMPLOYEE ID #####')
 
-			customer_id = content['customer']
-			print(customer_id)
-			sale_customer = Customer.objects.get(name=customer_id)
-			content['customer'] = sale_customer
+			# employee_id = content['employee']
+			# sale_employee = Employee.objects.get(employee_number=employee_id)
+			# content['employee'] = sale_employee
 
-			auto_id = content['auto']
-			# employee_href = f"/api/employees/{employee_id}/"
-			print(auto_id)
-			sale_auto = AutomobileVO.objects.get(vin=auto_id)
-			content['auto'] = sale_auto
+			# print(len(AutomobileVO.objects.all()))
+			# print(AutomobileVO.objects.all().first().__dict__)
+			# print(employee_id)
+			# print(sale_employee)
 
-			print('CONTENT!!!&@#$&%#$%#$@!!!!')
-			print(content)
+			# auto_id = content['auto']
+			# sale_auto = AutomobileVO.objects.get(vin=auto_id)
+			# content['auto'] = sale_auto
+
+
+			# customer_id = content['customer']
+			# print(customer_id)
+			# sale_customer = Customer.objects.get(name=customer_id)
+			# content['customer'] = sale_customer
+
+
+			# print('CONTENT!!!&@#$&%#$%#$@!!!!')
+			# print(content)
 			# content must contain what you need to create a sale
+			# sale = Sale.objects.create(**content)
+			# sale = Sale(
+			# 	automobile=sale_auto,
+			# 	customer=sale_customer,
+			# 	employee=sale_employee,
+			# 	price=content['price']
+			# )
 			sale = Sale.objects.create(**content)
+			sale.save()
 			return JsonResponse(
 				sale,
 				encoder=SaleEncoder,

@@ -76,14 +76,6 @@ class SaleForm extends React.Component {
         this.setState({ price: value})
     }
 
-    // async componentDidMount() {
-		// const url = 'http://localhost:8090/api/sales/'
-		// const response = await fetch(url);
-		// if (response.ok) {
-		// 	const data = await response.json();
-		// 	this.setState({sale: data.sale})
-		// }
-	// }
 
     async fetchAuto() {
         const response = await fetch('http://localhost:8100/api/automobiles');
@@ -115,11 +107,11 @@ class SaleForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const {auto, employee, customer, price} = this.state
-        // const auto =this.data.auto
-        // const { auto } = this.data
-        const data = { auto, employee, customer, price };
-        // const data = { auto: this.data.auto, employee: this.data.employee }
-        // const data = { auto, employee }
+        const data = {auto, employee, customer, price};
+        // delete data.auto
+        // delete data.employee
+        // delete data.customer
+
         console.log('console logging data under handleSubmit')
         console.log(data)
         const url = "http://localhost:8090/api/sales/";
@@ -133,7 +125,14 @@ class SaleForm extends React.Component {
         console.log(fetchConfig)
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            // const newSale = await response.json();
+            const soldUrl = `http://localhost:8100/api/automobiles/${data.auto}/`;
+            const soldFetchConfig = {
+                method:"put",
+                body: JSON.stringify({sold:true}),
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }
             console.log("HERE IS THE RESPONSE IN THE FETCH")
             console.log(response)
             this.setState({
