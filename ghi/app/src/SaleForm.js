@@ -93,9 +93,10 @@ class SaleForm extends React.Component {
     }
     async fetchEmployee() {
         const response = await fetch('http://localhost:8090/api/employees');
-        const newEmployee = await response.json();
-
-        this.setState({ employees: newEmployee.employees })
+        if (response.ok) {
+            const employeeData = await response.json()
+            this.setState({ employees: employeeData.employees})
+        }
     }
     async fetchCustomer() {
         const response = await fetch('http://localhost:8090/api/customers');

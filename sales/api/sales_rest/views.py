@@ -46,14 +46,13 @@ def api_list_sales(request):
 		# try:
 			content = json.loads(request.body)
 			# sale = Sale.objects.create(**content)
-			print(content)
+
 			employee_id = content['employee']
 			print(employee_id)
-
 			sale_employee = Employee.objects.get(employee_number=employee_id)
 			content['employee'] = sale_employee
 			print('EMPLOYEE ID #####')
-			print(employee_id)
+			print(sale_employee)
 
 			customer_id = content['customer']
 			print(customer_id)
@@ -68,6 +67,12 @@ def api_list_sales(request):
 			print('CONTENT!!!&@#$&%#$%#$@!!!!')
 			print(content)
 			sale = Sale.objects.create(**content)
+			# sale = Sale(
+			# 	automobile=sale_auto,
+			# 	customer=sale_customer,
+			# 	employee=sale_employee,
+			# 	price=content['price']
+			# )
 			return JsonResponse(
 				sale,
 				encoder=SaleEncoder,
