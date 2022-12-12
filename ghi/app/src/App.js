@@ -8,10 +8,11 @@ import AutomobileForm from './AutomobileForm';
 import ManufacturerForm from './ManufacturerForm';
 import VehicleModelsForm from './VehicleModelsForm';
 import SalesList from './SalesList';
-import SalesPersonList from './SalesPersonHistory';
-import SalesForm from './SaleForm';
-import SalesPersonForm from './SalesPersonForm';
+import EmployeeList from './EmployeeHistory';
+import SaleForm from './SaleForm';
+import EmployeeForm from './EmployeeForm';
 import CustomerForm from './CustomerForm';
+import CustomerList from './CustomerList';
 import TechnicianForm from './TechnicianForm';
 import AppointmentForm from './AppointmentForm';
 import AppointmentHistory from './AppointmentHistory';
@@ -26,19 +27,29 @@ function App(props) {
 		<Nav />
 		<div className="container">
 		<Routes>
-			<Route path="/" element={<MainPage />} />
+			<Route path="/" element={<MainPage />}>
+				<Route
+					path='*'
+					element={
+						<main style={{ padding: '1rem' }}>
+							<p>Nothing to see here!</p>
+						</main>
+					}
+					/>
+			</Route>
 			<Route path="manufacturers" element={<ManufacturersList />} />
 			<Route path="models" element={<VehicleModelsList />} />
 			<Route path="automobiles" element={<AutomobilesList />} />
 			<Route path="automobiles/new" element={<AutomobileForm />} />
 			<Route path="sales" element={<SalesList />} />
-			<Route path="sales/new" element={<SalesForm />} />
-			<Route path="seller" element={<SalesPersonList />} />
-			<Route path="seller/new" element={<SalesPersonForm />} />
-			<Route path="customers" element={<CustomerForm />} />
+			<Route path="sales/new" element={<SaleForm />} />
+			<Route path="employee" element={<EmployeeList />} />
+			<Route path="employee/new" element={<EmployeeForm />} />
+			<Route path="customers" element={<CustomerList />} />
 			<Route path='models/new' element={<VehicleModelsForm />} />
 			<Route path='manufacturers/new' element={<ManufacturerForm />} />
-      		<Route path='technicians/new' element={<TechnicianForm />} />
+			<Route path='customers/new' element={<CustomerForm />} />
+      				<Route path='technicians/new' element={<TechnicianForm />} />
 			<Route path='appointments/new' element={<AppointmentForm />} />
 			<Route path='appointments/history' element={<AppointmentHistory />} />
 			<Route path='appointments' element={<AppointmentList />} />
