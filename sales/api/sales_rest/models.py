@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 class AutomobileVO(models.Model):
-	import_href = models.CharField(max_length=200, unique=True)
+	# import_href = models.CharField(max_length=200, unique=True)
 	vin = models.CharField(max_length=17, unique=True)
 	sold = models.BooleanField()
 	# year = models.PositiveSmallIntegerField()
@@ -12,6 +12,11 @@ class AutomobileVO(models.Model):
     #     related_name="automobiles",
     #     on_delete=models.CASCADE,
     # )
+	def __str__(self):
+		return self.name
+
+	def get_api_url(self):
+		return reverse("api_show_automobile", kwargs={"pk": self.pk})
 
 # class CustomerVO(models.Model):
 # 	import_href = models.CharField(max_length=200, unique=True)
@@ -42,10 +47,11 @@ class Customer(models.Model):
 	# 	return reverse("api_list_customers", kwargs={"pk": self.id})
 
 class Sale(models.Model):
+	# import_href = models.CharField(max_length=200, unique=True)
 	price = models.PositiveIntegerField()
 	automobile = models.ForeignKey(
 		AutomobileVO,
-		related_name="automobile",
+		related_name="auto",
 		on_delete=models.PROTECT
 	)
 	employee = models.ForeignKey(

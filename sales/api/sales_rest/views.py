@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
-from .models import Sale, Customer, Employee
+from .models import Sale, Customer, Employee, AutomobileVO
 
 
 class SaleEncoder(ModelEncoder):
@@ -14,7 +14,7 @@ class SaleEncoder(ModelEncoder):
 		'employee_number',
 		'customer',
 		'price',
-		'automobile',
+		'auto',
 	]
 
 class CustomerListEncoder(ModelEncoder):
@@ -45,6 +45,29 @@ def api_list_sales(request):
 	else:
 		# try:
 			content = json.loads(request.body)
+			print("******HERE IS THE CONTENT:   ")
+			print(content)
+			# sale = Sale.objects.create(**content)
+			employee_id = content['employee']
+			print(employee_id)
+			sale_employee = Employee.objects.get(employee_number=employee_id)
+			content['employee'] = sale_employee
+			print('EMPLOYEE ID #####')
+
+			customer_id = content['customer']
+			print(customer_id)
+			sale_customer = Customer.objects.get(name=customer_id)
+			content['customer'] = sale_customer
+
+			auto_id = content['auto']
+			# employee_href = f"/api/employees/{employee_id}/"
+			print(auto_id)
+			sale_auto = AutomobileVO.objects.get(vin=auto_id)
+			content['auto'] = sale_auto
+
+			print('CONTENT!!!&@#$&%#$%#$@!!!!')
+			print(content)
+			# content must contain what you need to create a sale
 			sale = Sale.objects.create(**content)
 			return JsonResponse(
 				sale,
@@ -52,11 +75,11 @@ def api_list_sales(request):
 				safe=False,
 			)
 		# except:
-		# 	response = JsonResponse(
-		# 		{"message": "Could not add sale"}
-		# 	)
-		# 	response.status_code = 400
-		# 	return response
+			# response = JsonResponse(
+			# 	{"message": "Could not add sale"}
+			# )
+			# response.status_code = 400
+			# return response
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_sale(request, pk):
@@ -69,9 +92,10 @@ def api_show_sale(request, pk):
 				safe=False
 			)
 		except Sale.DoesNotExist:
-			response = JsonResponse({"message": "Does not exist"})
-			response.status_code = 404
-			return response
+			return JsonResponse(
+				{"message": "Does not exist"},
+				status_code = 404
+				)
 	elif request.method == "DELETE":
 		try:
 			sale = Sale.objects.get(id=pk)
@@ -85,19 +109,26 @@ def api_show_sale(request, pk):
 			return JsonResponse({"message": "Does not exist"})
 	else:
 		try:
-			content = json.loads(request.body)
-			sale = Sale.objects.get(id=pk)
-
-			props =['id']
-			for prop in props:
-				if prop in content:
-					setattr(sale, prop, content[prop])
-			sale.save()
+			Sale.objects.filter(id=pk).update(sold=True)
+			employeeSale = Sale.objects.get(id=pk)
 			return JsonResponse(
-				sale,
-				encoder=SaleEncoder,
-				safe=False,
+				employeeSale,
+				enocder=SaleEncoder,
+				safe=False
 			)
+			# content = json.loads(request.body)
+			# sale = Sale.objects.get(id=pk)
+
+			# props =['id']
+			# for prop in props:
+			# 	if prop in content:
+			# 		setattr(sale, prop, content[prop])
+			# sale.save()
+			# return JsonResponse(
+			# 	sale,
+			# 	encoder=SaleEncoder,
+			# 	safe=False,
+			# )
 		except Sale.DoesNotExist:
 			response = JsonResponse({"message": "Does not exist"})
 			response.status_code = 404
@@ -242,6 +273,6 @@ def api_show_employee(request,pk):
 				safe=False,
 			)
 		except Employee.DoesNotExist:
-			response = JsonResponse({"message": "Does not exist"})
-			response.status_code = 404
-			return response
+			return JsonResponse(
+				{"message": "Does not exist"},
+				status_code = 404)

@@ -6,6 +6,10 @@ class SalesList extends React.Component {
 		super(props);
 			this.state = {
 				sales: [],
+                employees: [],
+                customers: [],
+                autos: [],
+                price: ''
 			};
 		}
 
@@ -28,11 +32,11 @@ class SalesList extends React.Component {
 							<h3>All Sales</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
-                                    <tr>
+                                    <tr key="">
                                         <th>Employee</th>
-                                        {/* <th>Customer</th>
+                                        <th>Customer</th>
                                         <th>VIN</th>
-                                        <th>Sale Price</th> */}
+                                        <th>Sale Price</th>
                                         <th>Payment Method</th>
                                     </tr>
                                 </thead>
@@ -40,11 +44,11 @@ class SalesList extends React.Component {
                                     {this.state.sales.map(sale => {
                                         return (
                                             <tr key={sale.id}>
-												<td>{sale.name}</td>
-												<td>{sale.name}</td>
-												<td>{sale.name}</td>
-												<td>{sale.name}</td>
-												<td>Cash or Card</td>
+												<td>{sale.automobile.model.name}</td>
+												{/* <td>{employee.name}</td> */}
+												{/* <td>{sale.customer.name}</td> */}
+												{/* <td>{sale.price}</td> */}
+												{/* <td>Cash or Card</td> */}
                                             </tr>
                                         );
                                     })}
