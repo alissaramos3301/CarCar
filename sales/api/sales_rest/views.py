@@ -60,14 +60,12 @@ def api_list_sales(request):
 			content['customer'] = sale_customer
 
 			auto_id = content['auto']
-			# employee_href = f"/api/employees/{employee_id}/"
 			print(auto_id)
 			sale_auto = AutomobileVO.objects.get(vin=auto_id)
 			content['auto'] = sale_auto
 
 			print('CONTENT!!!&@#$&%#$%#$@!!!!')
 			print(content)
-			# content must contain what you need to create a sale
 			sale = Sale.objects.create(**content)
 			return JsonResponse(
 				sale,

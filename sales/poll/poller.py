@@ -14,7 +14,7 @@ django.setup()
 from sales_rest.models import AutomobileVO
 
 def get_automobile():
-    url = "http://inventory-api:8100/api/automobiles/"
+    url = "http://inventory-api:8000/api/automobiles/"
     response = requests.get(url)
     content = json.loads(response.content)
     print(content)
@@ -37,11 +37,10 @@ def poll():
     while True:
         print('Sales poller polling for data')
         try:
-            # Write your polling logic, here
-            pass
+            get_automobile()
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(60)
+        time.sleep(7)
 
 
 if __name__ == "__main__":
