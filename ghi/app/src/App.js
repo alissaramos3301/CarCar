@@ -40,8 +40,8 @@ function App(props) {
 			<Route path="automobiles/new" element={<AutomobileForm />} />
 			<Route path="sales" element={<SalesList />} />
 			<Route path="sales/new" element={<SaleForm />} />
-			<Route path="employee" element={<EmployeeList />} />
-			<Route path="employee/new" element={<EmployeeForm />} />
+			<Route path="employees" element={<EmployeeList />} />
+			<Route path="employees/new" element={<EmployeeForm />} />
 			<Route path="customers" element={<CustomerList />} />
 			<Route path='models/new' element={<VehicleModelsForm />} />
 			<Route path='manufacturers/new' element={<ManufacturerForm />} />

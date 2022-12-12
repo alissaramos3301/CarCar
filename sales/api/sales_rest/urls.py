@@ -1,5 +1,12 @@
 from django.urls import path, include
-from .views import api_list_customers, api_list_sales, api_show_customer, api_show_sale, api_list_employees, api_show_employee
+from .views import (
+    api_list_customers,
+    api_list_sales,
+    api_show_customer,
+    api_show_sale,
+    api_list_employees,
+    api_show_employee
+    )
 
 urlpatterns = [
     path('sales/', api_list_sales, name="api_list_sales"),
