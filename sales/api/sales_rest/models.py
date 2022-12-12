@@ -22,17 +22,17 @@ class Sale(models.Model):
 	price = models.PositiveIntegerField()
 	automobile = models.ForeignKey(
 		AutomobileVO,
-		related_name="auto",
+		related_name="sale",
 		on_delete=models.PROTECT
 	)
 	employee = models.ForeignKey(
 		Employee,
-		related_name="employee",
+		related_name="sale",
 		on_delete=models.PROTECT
 	)
 	customer = models.ForeignKey(
 		Customer,
-		related_name="customer",
+		related_name="sale",
 		on_delete=models.PROTECT
 	)
 

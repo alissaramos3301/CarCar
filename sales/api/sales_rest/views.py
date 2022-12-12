@@ -6,15 +6,11 @@ from common.json import ModelEncoder
 from .models import Sale, Customer, Employee, AutomobileVO
 
 
-class SaleEncoder(ModelEncoder):
-	model = Sale
+class AutomobileVOEncoder(ModelEncoder):
+	model = AutomobileVO
 	properties = [
-		'id',
-		'employee',
-		'employee_number',
-		'customer',
-		'price',
-		'auto',
+		'vin',
+		'sold',
 	]
 
 class CustomerListEncoder(ModelEncoder):
@@ -32,6 +28,25 @@ class EmployeeEncoder(ModelEncoder):
 		'name',
 		'employee_number',
 	]
+class SaleEncoder(ModelEncoder):
+	model = Sale
+	properties = [
+		'id',
+		'employee',
+		# 'employee_number',
+		'customer',
+		'price',
+		'automobile',
+	]
+	encoders = {
+        "automobile": AutomobileVOEncoder(),
+		"employee": EmployeeEncoder(),
+		"customer": CustomerListEncoder(),
+    }
+
+
+
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -49,7 +64,7 @@ def api_list_sales(request):
 
 			employee_id = content['employee']
 			print(employee_id)
-			sale_employee = Employee.objects.get(employee_number=employee_id)
+			sale_employee = Employee.objects.get(id=employee_id)
 			content['employee'] = sale_employee
 			print('EMPLOYEE ID #####')
 			print(sale_employee)
@@ -59,10 +74,10 @@ def api_list_sales(request):
 			sale_customer = Customer.objects.get(name=customer_id)
 			content['customer'] = sale_customer
 
-			auto_id = content['auto']
+			auto_id = content['automobile']
 			print(auto_id)
 			sale_auto = AutomobileVO.objects.get(vin=auto_id)
-			content['auto'] = sale_auto
+			content['automobile'] = sale_auto
 
 			print('CONTENT!!!&@#$&%#$%#$@!!!!')
 			print(content)

@@ -1,5 +1,4 @@
 import React from "react";
-// import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom'
 
 function withNavigate(Component) {
@@ -8,25 +7,11 @@ function withNavigate(Component) {
 		/>;
 }
 
-
 class SaleForm extends React.Component {
     constructor(props) {
     super(props);
-    // const data = {
-    //     auto: "",
-    //     employee: "",
-    //     // employee_number: "",
-    //     customer: "",
-    //     // price: "",
-    //     customers: [],
-    //     autos: [],
-    //     employees: []
-    // }
-    // this.state = {
-    //     mergedData: this.props.data
-    // }
     this.state = {
-        auto: "",
+        automobile: "",
         employee: "",
         customer: "",
         price: "",
@@ -41,17 +26,6 @@ class SaleForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     }
-    // componentDidMount = () => {
-    //     Promise.all([
-    //         fetch(this.props.autos).then(response => response.json()),
-    //         fetch(this.props.customers).then(response => response.json()),
-    //         fetch(this.props.employees).then(response => response.json()),
-    //     ]).then(([auto, customer, employee]) => {
-    //         this.setState({
-    //             mergedData: auto.concat(customer,employee)
-    //         });
-    //     })
-    // }
 
     handleChange(event) {
         const newState = {}
@@ -76,14 +50,6 @@ class SaleForm extends React.Component {
         this.setState({ price: value})
     }
 
-    // async componentDidMount() {
-		// const url = 'http://localhost:8090/api/sales/'
-		// const response = await fetch(url);
-		// if (response.ok) {
-		// 	const data = await response.json();
-		// 	this.setState({sale: data.sale})
-		// }
-	// }
 
     async fetchAuto() {
         const response = await fetch('http://localhost:8100/api/automobiles');
@@ -111,16 +77,14 @@ class SaleForm extends React.Component {
     }
 
 
-
-
     async handleSubmit(event) {
         event.preventDefault();
-        const {auto, employee, customer, price} = this.state
-        // const auto =this.data.auto
-        // const { auto } = this.data
-        const data = { auto, employee, customer, price };
-        // const data = { auto: this.data.auto, employee: this.data.employee }
-        // const data = { auto, employee }
+        const data = {
+            automobile: this.state.auto,    //this is what we want in insomnia
+            employee: this.state.employee,
+            customer: this.state.customer,
+            price: this.state.price,
+        }
         console.log('console logging data under handleSubmit')
         console.log(data)
         const url = "http://localhost:8090/api/sales/";
@@ -134,7 +98,6 @@ class SaleForm extends React.Component {
         console.log(fetchConfig)
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            // const newSale = await response.json();
             console.log("HERE IS THE RESPONSE IN THE FETCH")
             console.log(response)
             this.setState({
@@ -143,13 +106,6 @@ class SaleForm extends React.Component {
                 customer: '',
                 price: '',
             })
-            // const cleared = {
-            //     auto: '',
-            //     employee: '',
-            //     customer: '',
-            //     price: '',
-            // }
-            // this.setState(cleared)
             this.props.useNavigate("/sales")
         }
     }
@@ -165,7 +121,7 @@ class SaleForm extends React.Component {
                                     <option key="auto" value="auto">Choose an automobile</option>
                                     {this.state.autos.map((auto) => {
                                         return (
-                                        <option key={auto.vin} value={auto.vin}>{auto.model.name} </option>
+                                        <option key={auto.vin} value={auto.vin}>{auto.vin} </option>
                                         )})}
                                 </select>
                             </div>
@@ -174,7 +130,7 @@ class SaleForm extends React.Component {
                                     <option key="employee" value="employee">Choose an employee</option>
                                     {this.state.employees.map((employee) => {
                                         return (
-                                        <option key={employee.employee_number} value={employee.employee_number}>{employee.name} </option>
+                                        <option key={employee.id} value={employee.id}>{employee.employee_number} </option>
                                         )})}
                                 </select>
                             </div>
@@ -201,13 +157,3 @@ class SaleForm extends React.Component {
 }
 
 export default withNavigate(SaleForm);
-
-
-// const SaleForm = () => {
-
-//     const [autos, setAutos] = useState([])
-
-//     const [customers, setCustomers] = useState([])
-
-//     const [employees, setEmployees] = useState([])
-// }
