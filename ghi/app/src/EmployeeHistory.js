@@ -1,17 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-// function EmployeeSalesFiltered({sale}) {
-//     return (
-//         <tr key={sale.employee.id}>
-//             <td>{sale.employee.name}</td>
-//             <td>{sale.customer.name}</td>
-//             <td>{sale.automobile.vin}</td>
-//             <td>{sale.price}</td>
-//         </tr>
-//     )
-// }
-
 class EmployeeHistory extends React.Component {
 	constructor(props) {
 		super(props)
