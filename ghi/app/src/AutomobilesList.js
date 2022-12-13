@@ -20,6 +20,20 @@ class AutomobilesList extends React.Component {
 
 		}
 	}
+
+    async handleDelete(id) {
+        const url = `http://localhost:8100/api/automobiles/${id}`
+        const fetchConfig = {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const response = await fetch(url, fetchConfig);
+        if(response.ok) {
+            this.componentDidMount();
+        }
+    }
 	render() {
         return (
             <div className="container">
@@ -35,6 +49,7 @@ class AutomobilesList extends React.Component {
                                         <th>Year</th>
                                         <th>Model</th>
                                         <th>Manufacturer</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,6 +61,8 @@ class AutomobilesList extends React.Component {
 												<td>{auto.year}</td>
 												<td>{auto.model.name}</td>
 												<td>{auto.model.manufacturer.name}</td>
+												<td><button className="btn btn-light" onClick={() => this.handleDelete(auto.vin)}>Delete</button></td>
+
                                             </tr>
                                         );
                                     })}
