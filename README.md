@@ -48,27 +48,27 @@ In order to add one of them, click the add button on one of these pages which wi
 ![CarCar Diagram](carcar.png)
 
 ## Urls and Ports for Microservices
-    
+
     Sales: (http://localhost:8090/)
-    
+
     - port: 8090
-    
+
     Service: (http://localhost:8080/)
-    
+
     - port: 8080
-    
+
     Inventory: (http://localhost:8100/)
-    
+
     - port: 8100
-    
+
     React Website: (http://localhost:3000/)
-    
+
     - port: 3000
 
 ## Service API Documentation
 
 Document the endpoints of your API for each of the methods you implement (GET, POST, etc..)
-Provide sample success responses and sample request body data for the post requests.
+Provide sample success responses and sample request body data for the POST requests.
 
 You could theoretically screenshot insomnia.
 
@@ -89,45 +89,56 @@ New Appointments:
 
 ## Sales API Documentation
 - Sales Person
-    
-    List all sales people: GET: [http://localhost:8090/api/employees/]
 
-    Create new sales person: POST: [http://localhost:8090/api/employees/]
-    
-    - Layout for JSON body: {"name": "employee","employee_number": "3"}
-    
+    List all sales people:
+    GET: [http://localhost:8090/api/employees/]
+    ![List employees](GET%20employee%20list.png)
+
+    Create new sales person:
+    POST: [http://localhost:8090/api/employees/]
+    ![Create new employee](POST%20employee.png)
+    - Layout for JSON body: {"name": "employee","employee_number": 3}
+
     Update a sales person: PUT: [http://localhost:8090/api/employees/1/]
-    
+
+
+
     - Layout for JSON body: {"name": "Bob","employee_number": 2}
-    
+
     Delete a sales person: DELETE: [http://localhost:8090/api/employees/1/]
 - Customer
-    
-    List all customers: GET: [http://localhost:8090/api/customers/]
-    
-    Create new customer: POST: [http://localhost:8090/api/customers/]
-    
-    - Layout for JSON body: {"name": "customter3","phone_number": "1234567890","address": "1234 Address St"}
-    
+
+    List all customers:
+    GET: [http://localhost:8090/api/customers/]
+    ![List customers](GET%20customer%20list.png)
+
+    Create new customer:
+    POST: [http://localhost:8090/api/customers/]
+    ![Create new customer](POST%20customer.png)
+    - Layout for JSON body: {"name": "customter3","phone": "1234567890","address": "1234 Address St"}
+
     Update customer: PUT: [http://localhost:8090/api/customers/1/]
-    
-    - Layout for JSON body: {"name": "John","phone_number": "0987654321","address": "1235 Address St"}
-    
+    - Layout for JSON body: {"name": "John","phone": "0987654321","address": "1235 Address St"}
+
     Delete a customer: DELETE: [http://localhost:8090/api/customers/1/]
-    
+
 - Sales
-    
-    List all sales: GET: (http://localhost:8090/api/sales/)
-    
-    Create a sale: POST: (http://localhost:8090/api/sales/)
-    
-    - Layout for JSON body: {"employee": 3,"customer": 1,"sale_price": 20000,"automobile": "Import Href"}
-    
-    Update a sale: PUT: (http://localhost:8090/api/sales/1/)
-    
-    - Layout for JSON body: {"employee": 3,"customer": 1,"sale_price": PRICE,"automobile": Import Href}
-    
-    Delete a sale: DELETE: (http://localhost:8090/api/sales/1/)
+
+    List all sales:
+    GET: [http://localhost:8090/api/sales/]
+    ![List sales](GET%20sales%20list.png)
+
+    Create a sale:
+    POST: [http://localhost:8090/api/sales/]
+    ![Create sale](POST%20sale.png)
+    - Layout for JSON body: {"employee": 3,"customer": 1,"price": 20000,"automobile": "vin"}
+
+    Update a sale:
+    PUT: [http://localhost:8090/api/sales/1/]
+    - Layout for JSON body: {"employee": 3,"customer": 1,"price": PRICE,"automobile": "vin"}
+
+    Delete a sale:
+    DELETE: [http://localhost:8090/api/sales/1]
 
 ## Value Objects
 
@@ -268,18 +279,18 @@ Sales microservice keeps track of customers, sales reps, and sales record
 - Creation/list of a SalesRep
     - Requires input of name and a unique employeeID to create
     - Get request will send back name and employeeID
-    - To access SalesRep information send a get request to 
+    - To access SalesRep information send a GET request to
     "[http://localhost:8090/api/employees/]
 - Creation/list of Customers
     - Requires input of name, address, and phone_num (formatting is handled in the frontend)
     - Get request will list an array of objects that contains name, address, phone_num, and customer id
-    - To access Customer information send a get request to 
+    - To access Customer information send a GET request to
     "[http://localhost:8090/api/customers/]
 - List of Sales Record / Creation of Sales Record
     - Requires: An automobile(with associated vin) , customer, sales person to be made before creating a sales record
     - Creation of a sales record requires employeeID (coming from SalesPerson model), customer (customer id from customer model) and vin number(from AutoMobile VO that comes from our poller)
     - A record will send back price, id(of sales record), SalesPerson object model, automobile vin, customer name, and sales person name and employee ID (for ease of use)
-    - To access sales record send a get request to 
+    - To access sales record send a GET request to
     "[http://localhost:8090/api/sales]
 
 Sales microservice keeps track of customers, sales reps, and sales record
@@ -287,16 +298,16 @@ Sales microservice keeps track of customers, sales reps, and sales record
 - Creation/list of a SalesRep
     - Requires input of name and a unique employeeID to create
     - Get request will send back name and employeeID
-    - To access SalesRep information send a get request to 
+    - To access SalesRep information send a GET request to
     "[http://localhost:8090/api/employees/]
 - Creation/list of Customers
     - Requires input of name, address, and phone_num (formatting is handled in the frontend)
     - Get request will list an array of objects that contains name, address, phone_num, and customer id
-    - To access Customer information send a get request to 
+    - To access Customer information send a GET request to
     "[http://localhost:8090/api/customers/]
 - List of Sales Record / Creation of Sales Record
     - Requires: An automobile(with associated vin) , customer, sales person to be made before creating a sales record
     - Creation of a sales record requires employeeID (coming from SalesPerson model), customer (customer id from customer model) and vin number(from AutoMobile VO that comes from our poller)
     - A record will send back price, id(of sales record), SalesPerson object model, automobile vin, customer name, and sales person name and employee ID (for ease of use)
-    - To access sales record send a get request to 
+    - To access sales record send a GET request to
     "[http://localhost:8090/api/sales]
