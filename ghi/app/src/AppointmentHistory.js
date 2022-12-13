@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 
-export default function AppointmentHistory() {
+export default function ServiceHistory() {
     const [appointments, setAppointments] = useState([]);
     console.log(appointments)
     const [vin, setVin] = useState([]);
@@ -28,31 +28,6 @@ export default function AppointmentHistory() {
         fetchVin()
     }, []);
 
-    async function deleteAppointment(id) {
-      const url = `http://localhost:8080/api/appointments/`;
-      const result = await fetch(url, { method: 'DELETE' });
-      if (result.ok) {
-          setAppointments(appointments.filter((appointment) => appointment.id != id));
-      }
-  }
-
-  async function completeAppointment(id) {
-      const data = { is_complete: "True" }
-      const url = `http://localhost:8080/api/appointments/`;
-      const fetchConfig = {
-          method: "PUT",
-          body: JSON.stringify(data),
-          headers: {
-              'Content-Type': 'application/json',
-          },
-      };
-      const result = await fetch(url, fetchConfig);
-      if (result.ok) {
-          setAppointments(appointments.filter((appointment) => appointment.id != id));
-      }
-
-  }
-
     return (
         <div className="row">
             <div className="mt-4">
@@ -69,13 +44,11 @@ export default function AppointmentHistory() {
                 <thead>
                     <tr>
                         <th>VIN</th>
-                        <th>Customer</th>
+                        <th>Customer Name</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Technician</th>
                         <th>Reason for visit</th>
-                        <th>VIP</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,13 +65,10 @@ export default function AppointmentHistory() {
                                 <td>{appointment.owner}</td>
                                 <td>{appointment.date}</td>
                                 <td>{appointment.time}</td>
+                                {/* <td>{new Date(appointment.appointment_datetime).toLocaleDateString()}</td>
+                                <td>{new Date(appointment.appointment_datetime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td> */}
                                 <td>{appointment.technician.name}</td>
                                 <td>{appointment.reason}</td>
-                                <td>{appointment.vip}</td>
-                                <td>{appointment.status}
-                                  <button className="btn btn-danger" onClick={() => deleteAppointment(appointment.id)} type="button">Cancel</button>
-                                  <button className="btn btn-success" onClick={() => completeAppointment(appointment.id)} type="button">Finished</button>
-                                </td>
                             </tr>
                         );
                     })}
