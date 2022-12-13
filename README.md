@@ -65,7 +65,7 @@ In order to add one of them, click the add button on one of these pages which wi
     
     - port: 3000
 
-## API Documentation
+## Service API Documentation
 
 Document the endpoints of your API for each of the methods you implement (GET, POST, etc..)
 Provide sample success responses and sample request body data for the post requests.
@@ -77,7 +77,7 @@ Create a technician:
 ![Create Technician](create_technician.png)
 
 List Technicians:
-![Alt text](../../../Pictures/insomnia/list_technicians.png)
+![List Technicians](list_technicians.png)
 
 List Appointments:
 ![List Appointments](Insomnia_appointments.png)
@@ -87,7 +87,7 @@ New Appointments:
 
 
 
-Sales API Documentation
+## Sales API Documentation
 - Sales Person
     
     List all sales people: GET: [http://localhost:8090/api/employees/]
