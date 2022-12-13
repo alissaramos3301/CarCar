@@ -32,13 +32,14 @@ In your terminal run the following commands:
 7. Below you can read the project design and each microservices details to understand how everything works.
 8. Once all your containers in Docker are up and running go to http://localhost:3000/ to see the web app.
 9. At the top of your screen use the navbar to navigate through out the website
-10. You will be able to add automobiles in your inventory by creating a manufacturer, vehicle model, and automobile. Once you've done that you can create customers, salesperson, technicians, service appointments. As well as you will be able to search by the ViN for the lost of appointments, or service history.
+10. You will be able to add automobiles in your inventory by creating a manufacturer, vehicle model, and automobile. Once you've done that you can create customers, salesperson, technicians, service appointments. As well as you will be able to search by the VIN for the lost of appointments, or service history.
+11. To see a list of sales enter the Sales List. To see a list of sales by a specific sales person, go to the Employee Sales History tab, choose the employee you would like to view and their sales will show up in the table.
 
 - You can see the Manufactures, Vehicle Models, and Automobiles in the first few tabs.
 In order to add one of them, click the add button on one of these pages which will redirect you to the add pages.
-- To add a manufacturer, simply type the manufacturer name and hit create. This should redirect you to the manufacturer list page upon creation.
-- For the vehicle model  type the name of the vehicle model, enter a picture URL, and choose a manufacturer from the dropdown. You must add a manufacturer before you can add a vehicle. This should redirect you to the vehicle model list page upon creation.
-- To add an automobile,  type the color, the year and the vin number of the automobile. Then choose the model of the automobile from the dropdown. You must add a vehicle model (and also a manufacturer)before you can add an automobile. This should redirect you to the automobile list page upon creation.
+- ADD a manufacturer: enter the manufacturer name and hit create. This should redirect you to the manufacturer list page upon creation.
+- ADD a vehicle model: enter the name of the vehicle model, enter a picture URL, and choose a manufacturer from the dropdown. You must add a manufacturer before you can add a vehicle. This should redirect you to the vehicle model list page upon creation.
+- ADD an automobile: enter the color, the year and the vin number of the automobile. Then choose the model of the automobile from the dropdown. You must add a vehicle model (and also a manufacturer)before you can add an automobile. This should redirect you to the automobile list page upon creation.
 - You can also see the employees(sales people), technicians, and customers.
 - Lastly, you are able to add a sale, see all sales, a list of sales per employee, and add a service appointment.
 
@@ -88,7 +89,7 @@ New Appointments:
 
 
 ## Sales API Documentation
-- Sales Person
+- Sales Person(Employee)
 
     List all sales people:
     GET: [http://localhost:8090/api/employees/]
@@ -100,9 +101,6 @@ New Appointments:
     - Layout for JSON body: {"name": "employee","employee_number": 3}
 
     Update a sales person: PUT: [http://localhost:8090/api/employees/1/]
-
-
-
     - Layout for JSON body: {"name": "Bob","employee_number": 2}
 
     Delete a sales person: DELETE: [http://localhost:8090/api/employees/1/]

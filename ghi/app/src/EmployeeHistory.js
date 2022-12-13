@@ -75,7 +75,7 @@ class EmployeeHistory extends React.Component {
                                                 <td>{sale.customer.name}</td>
                                                 <td>{sale.automobile.vin}</td>
                                                 <td>{sale.price}</td>
-                                                <td>Sold or Available</td>
+                                                <td>Sold</td>
                                             </tr>
                                         );
                                     })}
