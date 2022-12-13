@@ -178,10 +178,58 @@ Inventory API keeps track of the automobile inventory for the automobile dealers
     - show a list of automobiles in inventory
     - You can access this via the link "Automobiles" in navbar.
 
+Inventory API keeps track of the automobile inventory for the automobile dealership.
+
+- A Manufacturer has:
+    - name
+    - You can create a Manufacturer via the link "Add Manufacturer" in navbar.
+- A Vehicle Model has:
+    - name
+    - picture_url
+    - manufacturer
+    - You can create a Vehicle Model via the link "Add Vehicle Models" in navbar.
+- An Automobile has:
+    - VIN
+    - color
+    - year
+    - model
+    - Manufacturer
+    - You can create an Automobile via the link "Automobiles" in navbar.
+- List of manufacturers:
+    - show a list of manufacturers
+    - You can access this via the link "Manufacturers" in navbar.
+- List of vehicle models:
+    - show a list of vehicle models
+    - You can access this via the link "Vehicle Models" in navbar.
+- List of automobiles:
+    - show a list of automobiles in inventory
+    - You can access this via the link "Automobiles" in navbar.
+
 ## Service microservice
 - Alissa
 Service Api keeps track of service appointments for automobiles and their owners.
+- Alissa
+Service Api keeps track of service appointments for automobiles and their owners.
 
+- A technician has:
+    - name
+    - employee number
+    - You can create a Technician via the link  "Enter a Technician" in navbar.
+- A service appointment has:
+    - VIN of the vehicle
+    - name of the person to whom the vehicle belongs "Owner"
+    - the date and time of the appointment
+    - the assigned technician
+    - a reason for the service appointment
+    - You can create an appointment via the link "Enter a Sevice Appointment" in navbar.
+- List of appointments:
+    - show a list of scheduled appointments contain all the details (cancelled - and finished appointment not shown)
+    - If the VIN of an automobile was at one time in Inventory, that appointment will be marked for "VIP treatment"
+    - Each appointment in the list have a button that allows a service concierge to cancel the appointment, or to show that the service appointment has been finished
+    - You can access the list of appointments via the link "List of Appointments" in navbar.
+- Service history:
+    - show a list of service appointments for a specific VIN
+    - You can access this via the link "Service History" in navbar. Then enter a VIN into the search box to show list of service appointments for that VIN.
 - A technician has:
     - name
     - employee number
@@ -205,12 +253,34 @@ Service Api keeps track of service appointments for automobiles and their owners
 ## Sales microservice
 - Mack
 Created AutomobileVO, Employee, Customer, and Sale models.
+- Mack
+Created AutomobileVO, Employee, Customer, and Sale models.
 Sales has foreign keys:
     -automobile pointing to AutomobileVO,
+    -employee pointing to Employee
     -employee pointing to Employee
     -customer pointing to Customer
 
 Automobile data is gathered through polling the api database in inventory
+
+Sales microservice keeps track of customers, sales reps, and sales record
+
+- Creation/list of a SalesRep
+    - Requires input of name and a unique employeeID to create
+    - Get request will send back name and employeeID
+    - To access SalesRep information send a get request to 
+    "[http://localhost:8090/api/employees/]
+- Creation/list of Customers
+    - Requires input of name, address, and phone_num (formatting is handled in the frontend)
+    - Get request will list an array of objects that contains name, address, phone_num, and customer id
+    - To access Customer information send a get request to 
+    "[http://localhost:8090/api/customers/]
+- List of Sales Record / Creation of Sales Record
+    - Requires: An automobile(with associated vin) , customer, sales person to be made before creating a sales record
+    - Creation of a sales record requires employeeID (coming from SalesPerson model), customer (customer id from customer model) and vin number(from AutoMobile VO that comes from our poller)
+    - A record will send back price, id(of sales record), SalesPerson object model, automobile vin, customer name, and sales person name and employee ID (for ease of use)
+    - To access sales record send a get request to 
+    "[http://localhost:8090/api/sales]
 
 Sales microservice keeps track of customers, sales reps, and sales record
 

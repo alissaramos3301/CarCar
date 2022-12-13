@@ -1,22 +1,22 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-class SalesPersonHistory extends React.Component {
+class EmployeeHistory extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
-				autos: [],
+				employees: [],
 			};
 		}
 
 	async componentDidMount() {
-		const url = 'http://localhost:8100/api/automobiles/';
+		const url = 'http://localhost:8090/api/employees/';
 
 		const response = await fetch(url);
 
 		if (response.ok) {
 			const data = await response.json();
-			this.setState({ autos: data.autos });
+			this.setState({ employees: data.employees });
 
 		}
 	}
@@ -26,33 +26,33 @@ class SalesPersonHistory extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="shadow p-4 mt-4">
-							<h3>Sales Person History</h3>
+							<h3>Employee Sales History</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
                                     <tr>
-                                        <th>Sales Person</th>
+                                        <th>Employee</th>
                                         <th>Customer</th>
-                                        <th>VIN</th>
-                                        <th>Sale Price</th>
-                                        <th>Payment Method</th>
+                                        {/* <th>VIN</th> */}
+                                        {/* <th>Sale Price</th> */}
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.autos.map(auto => {
+                                    {this.state.employees.map(employee => {
                                         return (
-                                            <tr key={auto.vin}>
-												<td>{auto.model.name}</td>
-												<td>{auto.model.name}</td>
-												<td>{auto.vin}</td>
-												<td>{auto.id}</td>
-												<td>Cash or Card</td>
+                                            <tr key={employee.name}>
+												<td>{employee.name}</td>
+												<td>{employee.name}</td>
+												{/* <td>{employee.vin}</td> */}
+												{/* <td>{employee.id}</td> */}
+												<td>Sold or Available</td>
                                             </tr>
                                         );
                                     })}
                                 </tbody>
                             </table>
                             <div>
-                                <Link to="/automobiles/new"
+                                <Link to="/sales/new"
                                 className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">Add a Personal Sale</Link>
                             </div>
                         </div>
@@ -62,4 +62,4 @@ class SalesPersonHistory extends React.Component {
         );
     };
 }
-export default SalesPersonHistory;
+export default EmployeeHistory;

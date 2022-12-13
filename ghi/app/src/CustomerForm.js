@@ -1,4 +1,11 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom'
+
+function withNavigate(Component) {
+	return (props) => <Component {...props}
+		useNavigate={useNavigate()}
+		/>;
+}
 
 class CustomerForm extends React.Component {
 	constructor(props) {
@@ -6,59 +13,55 @@ class CustomerForm extends React.Component {
 	this.state = {
 		name: "",
 		address: "",
-		phone_number: "",
+		phone: "",
+		// customers: []
 	};
 
-	this.handleTestChange = this.handleTestChange.bind(this);
+	this.handleChange = this.handleChange.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleTestChange(event) {
-	const value = event.target.value;
-	this.setState({ test: value });
+	handleChange(event) {
+	const newState = {};
+	newState[event.target.name] = event.target.value;
+	this.setState(newState);
 	}
 
-	async fetchModel() {
-	const res = await fetch('http://localhost:8100/api/customers');
-	const newModel = await res.json();
-
-	this.setState({ models: newModel.models })
-	}
-
-	componentDidMount() {
-	this.fetchModel()
-	}
-
+	// async componentDidMount() {
+	// 	const url = 'http://localhost:8090/api/customers/'
+	// 	const response = await fetch(url);
+	// 	if (response.ok) {
+	// 		const data = await response.json();
+	// 		this.setState({customer: data.customer})
+	// 	}
+	// }
 
 	async handleSubmit(event) {
-	event.preventDefault();
-	const data = { ...this.state };
-	delete data.models;
+		event.preventDefault();
+		const data = { ...this.state };
 
-	console.log(data)
-	const ModelsUrl = "http://localhost:8100/api/customers";
-	const fetchConfig = {
-		method: "post",
-		body: JSON.stringify(data),
-		headers: {
-		'Content-Type': 'application/json',
-		},
-	};
-
-    const response = await fetch(ModelsUrl, fetchConfig);
-
-    if (response.ok) {
-		const newModels = await response.json();
-		console.log(newModels)
-		const cleared = {
-		name: '',
-		address: '',
-		phone_number: '',
+		const customersUrl = "http://localhost:8090/api/customers/";
+		const fetchConfig = {
+			method: "post",
+			body: JSON.stringify(data),
+			headers: {
+			'Content-Type': 'application/json',
+			}
 		}
-		this.setState(cleared)
-
-
-	}
+		const response = await fetch(customersUrl, fetchConfig);
+		if (response.ok) {
+			// const newCustomer = await response.json();
+			// console.log(newCustomer)
+			this.setState({
+				name: '',
+				address: '',
+				phone: '',
+				// customer: '',
+			});
+			this.props.useNavigate("/sales/new");
+		}
+		// const newCustomer = await response.json();
+		// this.setState({ customers: newCustomer.customers })
 	}
 	render() {
 		return (
@@ -66,18 +69,18 @@ class CustomerForm extends React.Component {
 				<div className="offset-3 col-6">
 					<div className="shadow p-4 mt-4">
 						<h1>New Customer</h1>
-						<form onSubmit={this.handleTestChange} id="create-customer-form">
+						<form onSubmit={this.handleSubmit} id="create-customer-form">
 							<div className="form-floating mb-3">
-								<input onChange={this.handleTestChange} value={this.state.color} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
-								<label htmlFor="color">Full Name</label>
+								<input onChange={this.handleChange} value={this.state.name} placeholder="Name" required type="text" name="name" id="name" className="form-control" />
+								<label htmlFor="name">Full Name</label>
 							</div>
 							<div className="form-floating mb-3">
-								<input onChange={this.handleTestChange} value={this.state.year} placeholder="Address" required type="text" name="address" id="address" className="form-control" />
-								<label htmlFor="year">Address</label>
+								<input onChange={this.handleChange} value={this.state.address} placeholder="Address" required type="text" name="address" id="address" className="form-control" />
+								<label htmlFor="address">Address</label>
 							</div>
 							<div className="form-floating mb-3">
-								<input onChange={this.handleTestChange} placeholder="Phone Number" required type="number" name="number" id="number" className="form-control" />
-								<label htmlFor="age">Phone Number</label>
+								<input onChange={this.handleChange} value={this.state.phone} placeholder="Phone" required type="number" name="phone" id="phone" className="form-control" />
+								<label htmlFor="phone">Phone Number</label>
 							</div>
 						<button className="btn btn-primary">Create</button>
 						</form>
@@ -88,4 +91,5 @@ class CustomerForm extends React.Component {
 	}
 }
 
-export default CustomerForm;
+// export default CustomerForm;
+export default withNavigate(CustomerForm);

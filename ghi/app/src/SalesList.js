@@ -5,19 +5,22 @@ class SalesList extends React.Component {
 	constructor(props) {
 		super(props);
 			this.state = {
-				autos: [],
+				sales: [],
+                employees: [],
+                customers: [],
+                autos: [],
+                price: ''
 			};
 		}
 
 	async componentDidMount() {
-		const url = 'http://localhost:8100/api/automobiles/';
+		const url = 'http://localhost:8090/api/sales/';
 
 		const response = await fetch(url);
 
 		if (response.ok) {
 			const data = await response.json();
-			this.setState({ autos: data.autos });
-
+			this.setState({ sales: data.sales });
 		}
 	}
 	render() {
@@ -29,22 +32,22 @@ class SalesList extends React.Component {
 							<h3>All Sales</h3>
                             <table className="table table-success table-striped">
                                 <thead className="table-light">
-                                    <tr>
-                                        <th>Sales Person</th>
-                                        <th>Customer</th>
+                                    <tr key="">
                                         <th>VIN</th>
+                                        <th>Employee</th>
+                                        <th>Customer</th>
                                         <th>Sale Price</th>
                                         <th>Payment Method</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.autos.map(auto => {
+                                    {this.state.sales.map(sale => {
                                         return (
-                                            <tr key={auto.vin}>
-												<td>{auto.model.name}</td>
-												<td>{auto.model.name}</td>
-												<td>{auto.vin}</td>
-												<td>{auto.id}</td>
+                                            <tr key={sale.id}>
+												<td>{sale.automobile.vin}</td>
+												<td>{sale.employee.name}</td>
+											    <td>{sale.customer.name}</td>
+												<td>{sale.price}</td>
 												<td>Cash or Card</td>
                                             </tr>
                                         );
@@ -52,7 +55,7 @@ class SalesList extends React.Component {
                                 </tbody>
                             </table>
                             <div>
-                                <Link to="/automobiles/new"
+                                <Link to="/sales/new"
                                 className="d-block fs-3 p-2 bg-secondary text-white text-center text-decoration-none">Add New Sale</Link>
                             </div>
                         </div>
