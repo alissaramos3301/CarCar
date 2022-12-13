@@ -23,6 +23,20 @@ class SalesList extends React.Component {
 			this.setState({ sales: data.sales });
 		}
 	}
+
+    async handleDelete(id) {
+        const url = `http://localhost:8090/api/sales/${id}`
+        const fetchConfig = {
+            method: 'delete',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        const response = await fetch(url, fetchConfig);
+        if(response.ok) {
+            this.componentDidMount();
+        }
+    }
 	render() {
         return (
             <div className="container">
@@ -37,7 +51,7 @@ class SalesList extends React.Component {
                                         <th>Employee</th>
                                         <th>Customer</th>
                                         <th>Sale Price</th>
-                                        <th>Payment Method</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,9 +60,9 @@ class SalesList extends React.Component {
                                             <tr key={sale.id}>
 												<td>{sale.automobile.vin}</td>
 												<td>{sale.employee.name}</td>
-											    <td>{sale.customer.name}</td>
+                                                <td>{sale.customer.name}</td>
 												<td>{sale.price}</td>
-												<td>Cash or Card</td>
+												<td><button className="btn btn-dark" onClick={() => this.handleDelete(sale.id)}>Delete</button></td>
                                             </tr>
                                         );
                                     })}

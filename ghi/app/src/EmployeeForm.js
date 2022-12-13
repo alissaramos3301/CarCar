@@ -12,7 +12,6 @@ class EmployeeForm extends React.Component {
 	this.state = {
 		name: "",
 		employee_number: "",
-		// employees: []
 	};
 
 	this.handleChange = this.handleChange.bind(this);
@@ -25,14 +24,6 @@ class EmployeeForm extends React.Component {
 	this.setState(newState);
 	}
 
-	// async componentDidMount() {
-	// 	const url = 'http://localhost:8090/api/sales/'
-	// 	const response = await fetch(url);
-	// 	if (response.ok) {
-	// 		const data = await response.json();
-	// 		this.setState({employee: data.employee})
-	// 	}
-	// }
 
 	async handleSubmit(event) {
 		event.preventDefault();
@@ -53,10 +44,8 @@ class EmployeeForm extends React.Component {
 				name: "",
 				employee_number: "",
 			});
-			this.props.useNavigate("/sales/new");
+			this.props.useNavigate("/employees/");
 		}
-		// const newEmployee = await response.json();
-		// this.setState({ employee: newEmployee.employees})
 	}
 	render() {
 		return (

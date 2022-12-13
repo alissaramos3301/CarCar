@@ -85,8 +85,6 @@ class SaleForm extends React.Component {
             customer: this.state.customer,
             price: this.state.price,
         }
-        console.log('console logging data under handleSubmit')
-        console.log(data)
         const url = "http://localhost:8090/api/sales/";
         const fetchConfig = {
             method: "post",
@@ -95,11 +93,17 @@ class SaleForm extends React.Component {
             'Content-Type': 'application/json',
             },
         };
-        console.log(fetchConfig)
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            console.log("HERE IS THE RESPONSE IN THE FETCH")
-            console.log(response)
+        const soldUrl = `http://localhost:8100/api/automobiles/${data.auto}/`;
+        const soldFetchConfig = {
+            method: 'put',
+            body: JSON.stringify({sold: true}),
+            headers: {
+                "content-Type": "application/json",
+            }
+        }
+        const response = await fetch(soldUrl, soldFetchConfig);
             this.setState({
                 auto: '',
                 employee: '',
